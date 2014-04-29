@@ -51,16 +51,11 @@ public final class Bullet extends Projectile {
         super.tick(lstObj);
         for (GameObject tmpObj : lstObj) {
             if (getBounds().intersects(tmpObj.getBounds())) {
-                if (tmpObj.getId() == ObjectId.Dirt ||
-                        tmpObj.getId() == ObjectId.Grass ||
-                        tmpObj.getId() == ObjectId.Stone ||
-                        tmpObj.getId() == ObjectId.Ice) {
-                    lstObj.remove(this);
-                }
                 if (tmpObj.getId() == ObjectId.Mob) { // Hits a mob
                     // Check if instance of... instead?
                     LivingEntity ent = (LivingEntity) tmpObj;
                     ent.wound(4.20f);
+                    lstObj.remove(this);
                 }
             }
         }
