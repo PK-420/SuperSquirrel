@@ -87,13 +87,13 @@ public final class Skeleton extends LivingEntity {
             g.drawImage(tex.skeleton[0], (int)x, (int)y, (int)sizeX, (int)sizeY, null);
         }
     //////////Collision Boxes
-        Graphics2D g2d = (Graphics2D) g;
-        g.setColor(Color.yellow);
-        g2d.draw(getBoundsTop());
-        g2d.draw(getBoundsBottom());
-        g2d.draw(getBoundsLeft());
-        g2d.draw(getBoundsRight());
-        g.setColor(Color.red);
+//        Graphics2D g2d = (Graphics2D) g;
+//        g.setColor(Color.yellow);
+//        g2d.draw(getBoundsTop());
+//        g2d.draw(getBoundsBottom());
+//        g2d.draw(getBoundsLeft());
+//        g2d.draw(getBoundsRight());
+//        g.setColor(Color.red);
 //        g2d.draw(getBounds());
     }
     
