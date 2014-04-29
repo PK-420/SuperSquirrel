@@ -24,7 +24,9 @@
 
 package main.framework.gameObjects.livingEntities;
 
+import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.util.LinkedList;
 import main.Game;
@@ -51,8 +53,7 @@ public final class Skeleton extends LivingEntity {
 
     @Override
     public void tick(LinkedList<GameObject> lstObj) {
-//        super.tick();
-        x += velX;
+        super.tick();
         if (this.isAlive()) {
             walkLeft.runAnimation();
             walkRight.runAnimation();
@@ -85,10 +86,37 @@ public final class Skeleton extends LivingEntity {
         } else {
             g.drawImage(tex.skeleton[0], (int)x, (int)y, (int)sizeX, (int)sizeY, null);
         }
+    //////////Collision Boxes
+        Graphics2D g2d = (Graphics2D) g;
+        g.setColor(Color.yellow);
+        g2d.draw(getBoundsTop());
+        g2d.draw(getBoundsBottom());
+        g2d.draw(getBoundsLeft());
+        g2d.draw(getBoundsRight());
+        g.setColor(Color.red);
+//        g2d.draw(getBounds());
     }
-
+    
     @Override
     public Rectangle getBounds() {
-        return new Rectangle((int)x, (int)y, (int)sizeX, (int)sizeY);
+        return new Rectangle((int)x, (int)(y + sizeY/3), (int)sizeX, (int)(2*(sizeY/3)));
     }
+
+    public Rectangle getBoundsTop() {
+        return new Rectangle((int)(x + sizeX/4), (int)(y + sizeY/3), (int)sizeX/2, (int)sizeY/3);
+    }
+    
+    public Rectangle getBoundsBottom() {
+        return new Rectangle((int)(x + sizeX/4), (int)(y + (sizeY/3) * 2), (int)sizeX/2, (int)sizeY/3);
+    }
+
+    public Rectangle getBoundsLeft() {
+        return new Rectangle((int)x, (int)(y + sizeY/3), (int)sizeX/5, (int)(2*(sizeY/3)));
+    }
+
+    public Rectangle getBoundsRight() {
+        return new Rectangle((int)(x + 4 * (sizeX/5)), (int)(y + sizeY/3), (int)sizeX/5, (int)(2*(sizeY/3)));
+    }
+    
+    
 }
