@@ -79,31 +79,31 @@ public final class Level {
                 if (red == 0 && green == 255 && blue == 0) handler.addObject(new Block(xx, yy, ObjectId.Grass, 0)); // Grass
                 
                 if (red == 0 && green == 32 && blue == 0) { // Plant Small
-                    handler.addObject(new Block(xx, yy, ObjectId.Fern, 11));
+                    handler.addObjectFirst(new Block(xx, yy, ObjectId.Fern, 11));
                 }
                 if (red == 0 && green == 64 && blue == 0) {
-                    handler.addObject(new Block(xx, yy, ObjectId.Fern, 10)); // Plant Large
-                    handler.addObject(new Block(xx, yy - 1, ObjectId.Fern, 11));
+                    handler.addObjectFirst(new Block(xx, yy, ObjectId.Fern, 10)); // Plant Large
+                    handler.addObjectFirst(new Block(xx, yy - 1, ObjectId.Fern, 11));
                 }
                 if (red == 0 && green == 192 && blue == 0) { // Fern Small
-                    handler.addObject(new Block(xx, yy, ObjectId.Fern, 15));
+                    handler.addObjectFirst(new Block(xx, yy, ObjectId.Fern, 15));
                 }
                 if (red == 0 && green == 128 && blue == 0) { // Fern Large
-                    handler.addObject(new Block(xx, yy, ObjectId.Fern, 14));
-                    handler.addObject(new Block(xx, yy - 1, ObjectId.Fern, 15));
+                    handler.addObjectFirst(new Block(xx, yy, ObjectId.Fern, 14));
+                    handler.addObjectFirst(new Block(xx, yy - 1, ObjectId.Fern, 15));
                 }
                 if (red == 128 && green == 128 && blue == 128) { // Winter Fern Small
-                    handler.addObject(new Block(xx, yy, ObjectId.Fern, 13));
+                    handler.addObjectFirst(new Block(xx, yy, ObjectId.Fern, 13));
                 }
                 if (red == 192 && green == 192 && blue == 192) { // Winter Fern Large
-                    handler.addObject(new Block(xx, yy, ObjectId.Fern, 12));
-                    handler.addObject(new Block(xx, yy - 1, ObjectId.Fern, 13));
+                    handler.addObjectFirst(new Block(xx, yy, ObjectId.Fern, 12));
+                    handler.addObjectFirst(new Block(xx, yy - 1, ObjectId.Fern, 13));
                 }
                 
                 if (red == 255 && green == 128 && blue == 0) handler.addObject(new Coin(xx, yy, 7)); // Coin
                 
                 if (red == 0 && green == 0 && blue == 0) {
-                    handler.addObject(new Skeleton(xx, yy));
+                    handler.addObjectLast(new Skeleton(xx, yy));
                 } // Mob
                 
                 ////////////////// To be Added (RGB) /////////////////////
