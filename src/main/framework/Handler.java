@@ -49,9 +49,6 @@ public final class Handler {
      * @param input Keyboard Input to process
      */
     public void tick(GameKeyInput input) {
-        if (player != null) {
-            
-        }
         try {
             player.processInput(input);
             player.tick(mapObjects);
@@ -63,9 +60,8 @@ public final class Handler {
             System.out.println(e);
         }
         catch (java.util.ConcurrentModificationException e) {
-            System.out.println("Skipping Tick");
+            // System.out.println("Skipping Tick");
         }
-        
     }
 
     /**
