@@ -28,7 +28,6 @@ import main.framework.*;
 import java.awt.Color;
 import java.awt.Graphics;
 import main.graphics.hudObjects.Symbols;
-import main.Game;
 
 /**
  *
@@ -117,7 +116,7 @@ public abstract class Weapon {
     public int getMagSize() {
         return maxShots;
     }
-    public void drawMag(Graphics g) {
-        Symbols.drawNumber(g, this.getMagsLeft(), 10, Game.HEIGHT - 48, 32, 32);
+    public void drawMag(Graphics g, int x, int y) {
+        Symbols.drawNumber(g, this.getMagsLeft(), x, y, 32, 32);
     }
 }

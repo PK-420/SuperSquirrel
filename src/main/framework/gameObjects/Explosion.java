@@ -22,43 +22,43 @@
  * THE SOFTWARE.
  */
 
-package main.framework.gameObjects.projectiles;
+package main.framework.gameObjects;
 
-import main.framework.*;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.util.LinkedList;
-import main.framework.gameObjects.Projectile;
+import main.Game;
+import main.framework.GameObject;
+import main.framework.ObjectId;
+import main.graphics.Animation;
 
 /**
  *
  * @author Patrick Kerr
  */
-public final class AcornRocket extends Projectile {
-    
-    private final Gunner host;
+public final class Explosion extends GameObject {
 
-    public AcornRocket(float x, float y, Gunner host) {
-        super(x, y, host);
-        this.sizeX = 20;
-        this.sizeY = 16;
-        this.host = host;
-        velX = 8 * host.getFacing();
+    private final int speed = 1;
+    private final Animation explode = new Animation(speed, tex.explosion[0], tex.explosion[1], tex.explosion[2], tex.explosion[3], tex.explosion[4], tex.explosion[5], tex.explosion[6], tex.explosion[7], tex.explosion[8], tex.explosion[9], tex.explosion[10], tex.explosion[11], tex.explosion[12], tex.explosion[13], tex.explosion[14], tex.explosion[15], tex.explosion[14], tex.explosion[13], tex.explosion[12], tex.explosion[11], tex.explosion[10], tex.explosion[9], tex.explosion[8], tex.explosion[7], tex.explosion[6], tex.explosion[5], tex.explosion[4], tex.explosion[3], tex.explosion[2], tex.explosion[1], tex.explosion[0]);
+
+    public Explosion(float x, float y) {
+        super(x, y, ObjectId.Null);
     }
-
+    
     @Override
     public void tick(LinkedList<GameObject> lstObj) {
-        super.tick(lstObj);
+        if (explode.runAnimation() == explode.getLength() - 1) {
+            lstObj.remove(this);
+        }
     }
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(tex.acorn, (int)x, (int)y, (int)sizeX, (int)sizeY, null);
-//        super.render(g); // Shows collision box
+        explode.drawAnimation(g, (int)x, (int)y, Game.scale, Game.scale);
     }
 
     @Override
     public Rectangle getBounds() {
-        return new Rectangle((int)x, (int)y, (int)sizeX, (int)sizeY);
+        return new Rectangle((int)x, (int)y, Game.scale, Game.scale);
     }
 }

@@ -28,37 +28,47 @@ import main.framework.*;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.util.LinkedList;
+import main.framework.gameObjects.Explosion;
+import main.framework.gameObjects.LivingEntity;
 import main.framework.gameObjects.Projectile;
 
 /**
  *
  * @author Patrick Kerr
  */
-public final class Acorn extends Projectile {
+public final class Rocket extends Projectile {
     
     private final Gunner host;
 
-    public Acorn(float x, float y, Gunner host) {
+    public Rocket(float x, float y, Gunner host) {
         super(x, y, host);
-        this.sizeX = this.sizeY = 16;
+        this.sizeX = 20;
+        this.sizeY = 16;
         this.host = host;
-        velX = 10 * host.getFacing();
-//        if (handler.squirrel.getVelX() == 0) {
-//            this.velX = 5 * host.getFacing();
-//        }
-//        else {
-//            this.velX = (int)(host.getVelX() * 2.2);
-//        }
+        velX = 8 * host.getFacing();
     }
 
     @Override
-    public void tick(LinkedList<GameObject> mapObj) {
-        super.tick(mapObj);
+    public void tick(LinkedList<GameObject> lstObj) {
+        super.tick(lstObj);
+        for (GameObject tmpObj : lstObj) {
+            if (this != tmpObj) {
+                if (getBounds().intersects(tmpObj.getBounds())) {
+                    if (tmpObj.getId() == ObjectId.Mob) { // Hits a mob
+                        // Check if instance of... instead?
+                        lstObj.remove(this);
+                        lstObj.add(new Explosion(tmpObj.getX(), tmpObj.getY()));
+                        LivingEntity ent = (LivingEntity) tmpObj;
+                        ent.wound(ent.getHP());
+                    }
+                }
+            }
+        }
     }
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(tex.acorn, (int)x, (int)y, (int)sizeX, (int)sizeY, null);
+        g.drawImage(tex.bullet, (int)x, (int)y, (int)sizeX, (int)sizeY, null);
 //        super.render(g); // Shows collision box
     }
 

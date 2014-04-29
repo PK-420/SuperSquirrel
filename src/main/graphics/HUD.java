@@ -54,7 +54,7 @@ public final class HUD {
     public void render(Graphics g) {
         if (handler.player != null) { // Player HUD
             CoinCounter.draw(g, handler.player, Game.WIDTH - 10, 10, 30);
-            handler.player.getSelectedGun().drawMag(g);
+            handler.player.getSelectedGun().drawMag(g, 10, Game.HEIGHT - 48);
             StatusBar.draw(g, handler.player, 5, 5, 2, Align.Left);
             //StatusBar.draw(g, handler.player, handler.player, Game.WIDTH/2, 5, 2);
         }
@@ -101,7 +101,7 @@ public final class HUD {
         g.fillRect(x, y, 125, 120);
         g.setColor(Color.BLACK);
         g.drawString("=== PLAYER INFO ===", x, y += 10);
-        g.drawString("Dragging : " + handler.player.isDragging(), x, y += 10);
+        g.drawString("Dragging : " + handler.player.isSliding(), x, y += 10);
         g.drawString("Swimming : " + handler.player.isSwimming(), x, y += 10);
         g.drawString("Falling : " + handler.player.isFalling(), x, y += 10);
         g.drawString("Jumping : " + handler.player.isJumping(), x, y += 10);

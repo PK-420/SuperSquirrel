@@ -45,7 +45,7 @@ public abstract class LivingEntity extends GameObject {
     
     protected boolean jumping = false;
     protected boolean falling = false;
-    protected boolean dragging = true;
+    protected boolean sliding = true;
     protected boolean swimming = false;
     private final float maxAir = 100f;
     protected float air = maxAir;
@@ -64,36 +64,40 @@ public abstract class LivingEntity extends GameObject {
     
     @Override
     public void tick() {
-        super.tick();
-        if (jumping || falling) {
-            velY += gravity;
-            if (velY > tVel) {
-                velY = tVel;
+        if (this.isAlive()) {
+            super.tick();
+            if (jumping || falling) {
+                velY += gravity;
+                if (velY > tVel) {
+                    velY = tVel;
+                }
             }
-        }
-        if (dragging) {
-            velX *= drag;
-        } else {
-            if (jumping) { // air friction
-                velX *= (1 - drag);
+            if (sliding) {
+                drag = 0.04f; // Icy Ground
             } else {
-                velX *= (1 - (drag / 2));
+                if (jumping) { // Air Friction
+                    drag = 0.025f;
+                } else { // Ground 
+                    drag = 0.975f;
+                }
             }
-        }
-        if ((velX < 1 && velX >= 0) || (velX > -1 && velX <= 0)){
-            velX = 0;
-        }
-        if (swimming) {
-            if (air < 0) {
-                hp -= 0.7;
-            } else {
-                air-=0.1;
+            velX *= (1 - drag);
+            if ((velX < 1 && velX >= 0) || (velX > -1 && velX <= 0)) {
+                velX = 0;
             }
-        } else {
-            if (air < maxAir) {
-                air += 0.025;
+            
+            if (swimming) {
+                if (air < 0) {
+                    hp -= 0.7;
+                } else {
+                    air -= 0.1;
+                }
             } else {
-                air = maxAir;
+                if (air < maxAir) {
+                    air += 0.025;
+                } else {
+                    air = maxAir;
+                }
             }
         }
     }
@@ -152,16 +156,16 @@ public abstract class LivingEntity extends GameObject {
      * Checks if the entity is affected by drag
      * @return  True if entity is affected by drag, else False;
      */
-    public boolean isDragging() {
-        return dragging;
+    public boolean isSliding() {
+        return sliding;
     }
 
     /**
      * Sets the sliding state of the entity
      * @param dragging True = entity is affected by drag, else False;
      */
-    public void setDragging(boolean dragging) {
-        this.dragging = dragging;
+    public void setSliding(boolean dragging) {
+        this.sliding = dragging;
     }
 
     /**

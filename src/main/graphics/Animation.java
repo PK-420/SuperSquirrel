@@ -57,12 +57,13 @@ public final class Animation {
     /**
      * Runs the animation (Preferably during the tick method)
      */
-    public void runAnimation() {
+    public int runAnimation() {
         index++;
         if (index > speed) {
             index = 0;
             nextFrame();
         }
+        return count;
     }
     
     private void nextFrame() {
@@ -101,5 +102,12 @@ public final class Animation {
      */
     public void setSpeed(int speed) {
         this.speed = speed;
+    }
+    
+    /**
+     * @return The length of the animation (in frames)
+     */
+    public int getLength() {
+        return frames;
     }
 }

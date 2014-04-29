@@ -40,7 +40,7 @@ import main.framework.gameObjects.LivingEntity;
 public abstract class Player extends LivingEntity implements Gunner {
     
     protected Weapon[] gun;
-    protected int selectedGun = 0;
+    protected int selectedGun = 1;
     
     protected int facing = 0; // Facing ( - = Left, 0 = Front, + = Right )
     
@@ -81,8 +81,8 @@ public abstract class Player extends LivingEntity implements Gunner {
                     falling = false;
                     jumping = false;
                     swimming = false;
-                    dragging = tmpObj.getId() != ObjectId.Ice;
-                }
+                    sliding = tmpObj.getId() == ObjectId.Ice;
+                    }
                 else {
                     falling = true;
                 }
@@ -99,8 +99,14 @@ public abstract class Player extends LivingEntity implements Gunner {
             } 
             else if (tmpObj.getId() == ObjectId.Coin) {
                 if (tmpObj.getBounds().intersects(getBounds())) {
-                    tmpObj.setDisposable(true);
+                    mapObj.remove(tmpObj);
                     coins++;
+                }
+            }
+            else if (tmpObj.getId() == ObjectId.Mob) {
+                if (tmpObj.getBounds().intersects(getBounds())) {
+                    if (this.isAlive()) tmpObj.setVelX(-tmpObj.getVelX());
+                    hp-=20;
                 }
             }
         }
@@ -112,7 +118,7 @@ public abstract class Player extends LivingEntity implements Gunner {
         gun[selectedGun].render(g);
     }
     
-    public void move(GameKeyInput input) {
+    public void processInput(GameKeyInput input) {
         if (this.isAlive()) {
             if (input.isKeyPressed()) {
             }
@@ -121,14 +127,14 @@ public abstract class Player extends LivingEntity implements Gunner {
                 if (Math.abs(this.getVelX()) < 5) {
                     this.setVelX(5);
                 }
-                this.setDragging(false);
+                this.setSliding(true);
             }
             if (input.isKeyDown(KeyEvent.VK_D) || input.isKeyDown(KeyEvent.VK_RIGHT)) {
                 this.setFacing(1);
                 if (Math.abs(this.getVelX()) < 5) {
                     this.setVelX(5);
                 }
-                this.setDragging(false);
+                this.setSliding(true);
             }
             if (input.isKeyDown(KeyEvent.VK_SHIFT)) {
                 if (this.getVelX() != 0) {

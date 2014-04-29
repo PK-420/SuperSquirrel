@@ -24,11 +24,12 @@
 
 package main.framework;
 
-import main.framework.gameObjects.livingEntities.Squirrel;
 import main.framework.gameObjects.livingEntities.Player;
 import main.framework.gameObjects.*;
 import java.awt.image.BufferedImage;
 import main.Game;
+import main.framework.gameObjects.livingEntities.Skeleton;
+import main.framework.gameObjects.livingEntities.Squirrel;
 
 /**
  *
@@ -59,7 +60,7 @@ public final class Level {
     
     private void load(BufferedImage image, Handler handler) { //Pixel color to object conversion
 //        int size = (Game.HEIGHT / HEIGHT);
-        System.out.println("Level: " + WIDTH + "x" + H + " (" + HEIGHT + " with legend)");
+        System.out.println("Level: " + WIDTH + "x" + H + " (" + WIDTH + "x" + HEIGHT + " total)");
         for (int yy = 0; yy < H; yy++) {
             for (int xx = 0; xx < WIDTH; xx++) {
                 int pixel = image.getRGB(xx, yy);
@@ -100,6 +101,10 @@ public final class Level {
                 }
                 
                 if (red == 255 && green == 128 && blue == 0) handler.addObject(new Coin(xx, yy, 7)); // Coin
+                
+                if (red == 0 && green == 0 && blue == 0) {
+                    handler.addObject(new Skeleton(xx, yy));
+                } // Mob
                 
                 ////////////////// To be Added (RGB) /////////////////////
                 // 255 0 0 : Fire

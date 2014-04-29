@@ -22,52 +22,54 @@
  * THE SOFTWARE.
  */
 
-package main.framework.gameObjects;
+package main.framework.gameObjects.projectiles;
 
-import java.awt.Color;
 import main.framework.*;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.util.LinkedList;
-import main.Game;
+import main.framework.gameObjects.LivingEntity;
+import main.framework.gameObjects.Projectile;
 
 /**
  *
  * @author Patrick Kerr
  */
-public abstract class Projectile extends GameObject {
+public final class Bullet extends Projectile {
     
     private final Gunner host;
 
-    public Projectile(float x, float y, Gunner host) {
-        super(x, y, ObjectId.Bullet);
+    public Bullet(float x, float y, Gunner host) {
+        super(x, y, host);
         this.sizeX = this.sizeY = 16;
         this.host = host;
         velX = 10 * host.getFacing();
-//        if (handler.squirrel.getVelX() == 0) {
-//            this.velX = 5 * host.getFacing();
-//        }
-//        else {
-//            this.velX = (int)(host.getVelX() * 2.2);
-//        }
     }
 
     @Override
-    public void tick(LinkedList<GameObject> mapObj) {
-        super.tick();
-//        velY += gravity; // Gravity acceleration
-        if (x > -Game.getCamera().getX() + Game.WIDTH || x < -Game.getCamera().getX()) { 
-            mapObj.remove(this);
+    public void tick(LinkedList<GameObject> lstObj) {
+        super.tick(lstObj);
+        for (GameObject tmpObj : lstObj) {
+            if (getBounds().intersects(tmpObj.getBounds())) {
+                if (tmpObj.getId() == ObjectId.Dirt ||
+                        tmpObj.getId() == ObjectId.Grass ||
+                        tmpObj.getId() == ObjectId.Stone ||
+                        tmpObj.getId() == ObjectId.Ice) {
+                    lstObj.remove(this);
+                }
+                if (tmpObj.getId() == ObjectId.Mob) { // Hits a mob
+                    // Check if instance of... instead?
+                    LivingEntity ent = (LivingEntity) tmpObj;
+                    ent.wound(4.20f);
+                }
+            }
         }
     }
 
     @Override
     public void render(Graphics g) {
-////////// Collision Box
-        g.setColor(Color.RED);
-        Graphics2D g2d = (Graphics2D) g;
-        g2d.draw(getBounds());
+        g.drawImage(tex.bullet, (int)x, (int)y, (int)sizeX, (int)sizeY, null);
+//        super.render(g); // Shows collision box
     }
 
     @Override

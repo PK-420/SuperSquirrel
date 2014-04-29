@@ -75,11 +75,7 @@ public abstract class GameObject {
     /**
      * Side friction
      */
-    protected final float drag = 0.025f;
-    /**
-     * If true, Object will be destroyed in next handler tick
-     */
-    protected boolean disposable = false;
+    protected float drag = 0.025f;
     
     private final ObjectId id;
     
@@ -201,19 +197,5 @@ public abstract class GameObject {
      */
     public float getSizeY() {
         return sizeY;
-    }
-    /**
-     * @return True if the object is no longer needed, else false
-     */
-    public boolean isDisposable() {
-        return disposable;
-    }
-
-    /**
-     * Flags the object to be destroyed
-     * @param disposable True = Can be destroyed, else false
-     */
-    public void setDisposable(boolean disposable) {
-        this.disposable = disposable;
     }
 }

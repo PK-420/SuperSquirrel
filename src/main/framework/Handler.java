@@ -50,20 +50,22 @@ public final class Handler {
      */
     public void tick(GameKeyInput input) {
         if (player != null) {
-            player.move(input);
+            
+        }
+        try {
+            player.processInput(input);
             player.tick(mapObjects);
-            if (player.isDisposable()) {
-                player = null;
+            for (GameObject tmpObj : mapObjects) {
+                tmpObj.tick(mapObjects);
             }
+        } 
+        catch (NullPointerException e) {
+            System.out.println(e);
+        }
+        catch (java.util.ConcurrentModificationException e) {
+            System.out.println("Skipping Tick");
         }
         
-        for (GameObject tmpObj : mapObjects) {
-            if (tmpObj.isDisposable()) { // deletes unused objects?!
-                removeObject(tmpObj);
-                return;
-            }
-            tmpObj.tick(mapObjects);
-        }
     }
 
     /**

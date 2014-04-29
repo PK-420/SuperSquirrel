@@ -44,5 +44,6 @@ public enum ObjectId {
     Flag,
     Coin,
     Fern,
-    Mob;
+    Mob,
+    Null;
 }

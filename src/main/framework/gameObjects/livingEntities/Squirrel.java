@@ -46,13 +46,13 @@ public final class Squirrel extends Player {
     private final Animation eatRight = new Animation(10, tex.squirrel[11], tex.squirrel[12], tex.squirrel[13], tex.squirrel[14], tex.squirrel[15], tex.squirrel[16], tex.squirrel[17], tex.squirrel[18]);
     private final Animation eatLeft = new Animation(10, tex.squirrel[21], tex.squirrel[22], tex.squirrel[23], tex.squirrel[24], tex.squirrel[25], tex.squirrel[26], tex.squirrel[27], tex.squirrel[28]);
     private final Animation eat = new Animation(10, tex.squirrel[31], tex.squirrel[32], tex.squirrel[33], tex.squirrel[34], tex.squirrel[35], tex.squirrel[36], tex.squirrel[37], tex.squirrel[38]);
-    private final Animation dead= new Animation(10, tex.squirrel[39], tex.squirrel[40]);
+    private final Animation dead = new Animation(10, tex.squirrel[39], tex.squirrel[40]);
         
     public Squirrel(float x, float y, Handler handler) {
         super(x, y);
         gun = new Weapon[2];
-        gun[0] = new AcornPistol(this, handler);
-        gun[1] = new AcornBazooka(this, handler);
+        gun[0] = new Pistol(this, handler);
+        gun[1] = new Bazooka(this, handler);
         avatar = eat;
         sizeX = 45; 
         sizeY = 45;

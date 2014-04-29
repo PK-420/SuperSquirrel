@@ -33,7 +33,6 @@ import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferStrategy;
 import java.util.Random;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -210,13 +209,13 @@ public final class Game extends Canvas implements Runnable {
     
     private void pollKeyboard() {
         if (input.isKeyReleased()) {
-            if (input.isKeyUp(KeyEvent.VK_F1)) { // Help Popup
-                JOptionPane.showMessageDialog(this, "You can use either WASD or the arrows to navigate."
-                        + "\n\nW / Up = Jump\nA / Left = Left\nS / Down = Unassigned\n"
-                        + "D / Right = Right\n\nHold Shift = Sprint\n\nSpacebar = Shoot"
-                        + "\nR / NumPad 0 = Reload"
-                        + "\n\nF3 = Display / Hide Performance Overlay", "Controls", JOptionPane.INFORMATION_MESSAGE);
-            }
+//            if (input.isKeyUp(KeyEvent.VK_F1)) { // Help Popup
+//                JOptionPane.showMessageDialog(this, "You can use either WASD or the arrows to navigate."
+//                        + "\n\nW / Up = Jump\nA / Left = Left\nS / Down = Unassigned\n"
+//                        + "D / Right = Right\n\nHold Shift = Sprint\n\nSpacebar = Shoot"
+//                        + "\nR / NumPad 0 = Reload"
+//                        + "\n\nF3 = Display / Hide Performance Overlay", "Controls", JOptionPane.INFORMATION_MESSAGE);
+//            } // Find a better solution
             if (input.isKeyUp(KeyEvent.VK_F3)) { // Toggle FPS & TPS
                 hud.toggleDebugInfo();
             }

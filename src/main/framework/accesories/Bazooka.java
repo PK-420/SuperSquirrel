@@ -26,38 +26,38 @@ package main.framework.accesories;
 
 import main.framework.*;
 import java.awt.Graphics;
-import main.framework.gameObjects.projectiles.Acorn;
+import main.framework.gameObjects.projectiles.Rocket;
 import main.graphics.Texture;
 import main.Game;
 
 /**
  *
- * @author Patrick
+ * @author Patrick Kerr
  */
-public final class AcornPistol extends Weapon {
+public final class Bazooka extends Weapon {
 
     private final Texture tex = Game.getTexture();
-    public AcornPistol(Gunner shooter, Handler handler) {
+    public Bazooka(Gunner shooter, Handler handler) {
         super(shooter, handler);
-        maxShots = 11;
-        mags = 5;
-        reloadSpeed = 50;
+        maxShots = 3;
+        mags = 2;
+        reloadSpeed = 120;
         reload();
     }
 
     @Override
     public void shoot() {
-        super.shoot(new Acorn(shooter.getX(), shooter.getY() + 15, shooter));
+        super.shoot(new Rocket(shooter.getX(), shooter.getY() + 15, shooter));
     }
 
     @Override
-    public void drawMag(Graphics g) {
-        super.drawMag(g);
+    public void drawMag(Graphics g, int x, int y) {
+        super.drawMag(g, x, y);
         for (int i = this.getMagSize(); i > 0; i--) { // Show Mags
             if (i <= this.getShotsLeft()) {
-                g.drawImage(tex.acorn, (i * 20) + 20, Game.HEIGHT - 48, null);
+                g.drawImage(tex.bullet, (i * 20) + x + 10, y, null);
             } else {
-                g.drawImage(tex.acornSlot, (i * 20) + 20, Game.HEIGHT - 48, null);
+                g.drawImage(tex.bulletSlot, (i * 20) + x + 10, y, null);
             }
         }
     }
