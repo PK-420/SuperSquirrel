@@ -53,6 +53,19 @@ public abstract class Player extends LivingEntity implements Gunner {
     @Override
     public void tick(LinkedList<GameObject> mapObj) {
         super.tick();
+        if (sliding) {
+                drag = 0.04f; // Icy Ground
+            } else {
+                if (jumping) { // Air Friction
+                    drag = 0.025f;
+                } else { // Ground 
+                    drag = 0.975f;
+                }
+            }
+        velX *= (1 - drag);
+        if ((velX < 1 && velX >= 0) || (velX > -1 && velX <= 0)) {
+            velX = 0;
+        }
         gun[selectedGun].tick();
         for (GameObject tmpObj : mapObj) {
             /* if (tmpObj.getId() == ObjectId.Water) {

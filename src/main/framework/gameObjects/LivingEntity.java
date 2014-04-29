@@ -45,7 +45,7 @@ public abstract class LivingEntity extends GameObject {
     
     protected boolean jumping = false;
     protected boolean falling = false;
-    protected boolean sliding = true;
+    protected boolean sliding = false;
     protected boolean swimming = false;
     private final float maxAir = 100f;
     protected float air = maxAir;
@@ -64,28 +64,14 @@ public abstract class LivingEntity extends GameObject {
     
     @Override
     public void tick() {
-        if (this.isAlive()) {
-            super.tick();
-            if (jumping || falling) {
+        super.tick();
+        if (jumping || falling) {
                 velY += gravity;
                 if (velY > tVel) {
                     velY = tVel;
                 }
             }
-            if (sliding) {
-                drag = 0.04f; // Icy Ground
-            } else {
-                if (jumping) { // Air Friction
-                    drag = 0.025f;
-                } else { // Ground 
-                    drag = 0.975f;
-                }
-            }
-            velX *= (1 - drag);
-            if ((velX < 1 && velX >= 0) || (velX > -1 && velX <= 0)) {
-                velX = 0;
-            }
-            
+        if (this.isAlive()) {
             if (swimming) {
                 if (air < 0) {
                     hp -= 0.7;
