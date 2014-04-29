@@ -59,8 +59,8 @@ public final class HUD {
             //StatusBar.draw(g, handler.player, handler.player, Game.WIDTH/2, 5, 2);
         }
         if (showDebug) { // Performance Overlay
-            showGameDebug(g, 0, 0);
-            showPlayerDebug(g, 0, 50);
+            showGameDebug(g, 0, 80);
+            showPlayerDebug(g, 0, 130);
             g.setColor(Color.WHITE);
             g.fillRect(5, Game.HEIGHT - 15, 275, 10);
             g.setColor(Color.BLACK);
@@ -74,7 +74,7 @@ public final class HUD {
     
     private void showGameDebug(Graphics g, int x, int y) {
         g.setColor(Color.WHITE);
-        g.fillRect(0, 0, 112, 40);
+        g.fillRect(x, y, 112, 40);
         g.setColor(Color.BLACK);
         g.drawString("=== GAME INFO ===", x, y += 10);
         g.drawString("Objects : " + String.valueOf(handler.mapObjects.size()), x, y += 10);
