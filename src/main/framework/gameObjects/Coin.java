@@ -38,10 +38,8 @@ public final class Coin extends GameObject {
 
     private final Animation spin;
     
-    public Coin(int x, int y, int spinSpeed) {
+    public Coin(float x, float y, int spinSpeed) {
         super(x, y, ObjectId.Coin);
-        super.x *= sizeX;
-        super.y *= sizeY;
         spin = new Animation(spinSpeed, tex.coin[0], tex.coin[1], tex.coin[2], tex.coin[3], tex.coin[4], tex.coin[5], tex.coin[6], tex.coin[7]);
     }
 
