@@ -100,7 +100,7 @@ public final class Level {
                     handler.addObjectFirst(new Block(xx, yy - 1, ObjectId.Fern, 13));
                 }
                 
-                if (red == 255 && green == 128 && blue == 0) handler.addObject(new Coin(xx, yy, 7)); // Coin
+                if (red == 255 && green == 128 && blue == 0) handler.addObject(new Coin(xx * Game.scale, yy * Game.scale, 7)); // Coin
                 
                 if (red == 0 && green == 0 && blue == 0) {
                     handler.addObjectLast(new Skeleton(xx, yy));
