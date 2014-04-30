@@ -24,14 +24,11 @@
 
 package main.framework.gameObjects.livingEntities;
 
-import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.util.LinkedList;
 import main.Game;
-import main.framework.GameObject;
-import main.framework.ObjectId;
+import main.framework.*;
 import main.framework.gameObjects.LivingEntity;
 import main.graphics.Animation;
 
@@ -46,6 +43,7 @@ public final class Skeleton extends LivingEntity {
     
     public Skeleton(float x, float y) {
         super(x * Game.scale, y * Game.scale, ObjectId.Mob);
+        hp = 25;
         sizeX = sizeY = 32;
         drag = 1;
         velX = 3;
