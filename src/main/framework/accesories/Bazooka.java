@@ -42,12 +42,15 @@ public final class Bazooka extends Weapon {
         maxShots = 3;
         mags = 2;
         reloadSpeed = 120;
+        cooldown = 50;
         reload();
     }
 
     @Override
     public void shoot() {
-        super.shoot(new Rocket(shooter.getX(), shooter.getY() + 15, shooter));
+        if (super.shoot(new Rocket(shooter.getX(), shooter.getY() + 15, shooter))) {
+            SFX.play("/audio/shot_rocket.wav");
+        }
     }
 
     @Override

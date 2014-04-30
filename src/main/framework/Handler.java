@@ -25,6 +25,7 @@
 package main.framework;
 
 import java.awt.Graphics;
+import java.util.ConcurrentModificationException;
 import java.util.LinkedList;
 import main.framework.gameObjects.livingEntities.Player;
 
@@ -57,10 +58,9 @@ public final class Handler {
             }
         } 
         catch (NullPointerException e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
-        catch (java.util.ConcurrentModificationException e) {
-            // System.out.println("Skipping Tick");
+        catch (ConcurrentModificationException e) { 
         }
     }
 

@@ -55,7 +55,7 @@ public abstract class Weapon {
     
     public abstract void shoot();
     
-    protected void shoot(GameObject projectile) {
+    protected boolean shoot(GameObject projectile) {
         if (cdTimer < 0) {
             cdTimer = cooldown;
             if (reloadTimer < 0 && bullets-- > 0) {
@@ -63,16 +63,19 @@ public abstract class Weapon {
     //            if (bullets == 0) {
     //                reload(40); // AutoReload
     //            }
+                return true;
             } else {
                 bullets = 0;
+                SFX.play("/audio/empty_gun.wav");
             }
         }
-        
+        return false;
     }
     public void reload() {
         ratio = (float)reloadBarLength / (float)reloadSpeed;
         if (reloadTimer < 0 && bullets < maxShots && mags > 0) {
             reloadTimer = reloadSpeed;
+            SFX.play("/audio/reload_mag.wav");
         }
     }
     
