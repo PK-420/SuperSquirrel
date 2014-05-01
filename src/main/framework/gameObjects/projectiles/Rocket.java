@@ -54,6 +54,7 @@ public final class Rocket extends Projectile {
                 if (getBounds().intersects(tmpObj.getBounds())) {
                     if (tmpObj.getId() == ObjectId.Mob) { // Hits a mob
                         // Check if instance of... instead?
+                        SFX.play("/audio/explosion.wav");
                         lstObj.remove(this);
                         lstObj.add(new Explosion(tmpObj.getX(), tmpObj.getY()));
                         LivingEntity ent = (LivingEntity) tmpObj;

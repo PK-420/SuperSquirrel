@@ -33,9 +33,26 @@ import javax.sound.sampled.Clip;
 public final class SFX {
     
     private static Clip clip;
+    private static final AudioClipLoader loader = new AudioClipLoader();
+    
+    /**
+     * Plays the specified sound once
+     * @param path
+     */
     public static void play(String path) {
-        AudioClipLoader loader = new AudioClipLoader();
         clip = loader.loadSFX(path);
         clip.start();
+    }
+    
+    /**
+     * Plays the specified sound for x times
+     * @param path Path to the sound clip
+     * @param x Numbers of time to loop (x > 0)
+     */
+    public static void play(String path, int x) {
+        if (x > 0) {
+            clip = loader.loadSFX(path);
+            clip.loop(x - 1);
+        }
     }
 }

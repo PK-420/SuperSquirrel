@@ -43,12 +43,10 @@ public final class Explosion extends GameObject {
     
     public Explosion(float x, float y) {
         super(x, y, ObjectId.Null);
-        SFX.play("/audio/explosion.wav");
     }
     
     public Explosion(float x, float y, GameObject reward) {
         super(x, y, ObjectId.Null);
-        SFX.play("/audio/explosion.wav");
         this.reward = reward;
     }
     
