@@ -52,6 +52,7 @@ public final class Animation {
         images = new BufferedImage[args.length];
         System.arraycopy(args, 0, images, 0, args.length);
         frames = args.length;
+        currentImg = images[count];
     }
     
     /**
@@ -62,8 +63,9 @@ public final class Animation {
         if (index > speed) {
             index = 0;
             nextFrame();
+            return count;
         }
-        return count;
+        return -1;
     }
     
     private void nextFrame() {

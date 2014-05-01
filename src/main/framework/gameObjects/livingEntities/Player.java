@@ -31,7 +31,7 @@ import java.awt.event.KeyEvent;
 import java.util.LinkedList;
 import main.framework.accesories.Weapon;
 import main.Game;
-import main.framework.gameObjects.LivingEntity;
+import main.framework.gameObjects.*;
 
 /**
  *
@@ -40,18 +40,20 @@ import main.framework.gameObjects.LivingEntity;
 public abstract class Player extends LivingEntity implements Gunner {
     
     protected Weapon[] gun;
-    protected int selectedGun = 1;
+    protected int selectedGun = 0;
     
     protected int facing = 0; // Facing ( - = Left, 0 = Front, + = Right )
     
     protected int coins = 0;
+    
+    private int protection = 0;
     
     public Player(float x, float y) {
         super(x, y, ObjectId.Player);
     }
     
     @Override
-    public void tick(LinkedList<GameObject> mapObj) {
+    public void tick(LinkedList<GameObject> lstObj) {
         super.tick();
         if (sliding) {
                 drag = 0.04f; // Icy Ground
@@ -67,7 +69,7 @@ public abstract class Player extends LivingEntity implements Gunner {
             velX = 0;
         }
         gun[selectedGun].tick();
-        for (GameObject tmpObj : mapObj) {
+        for (GameObject tmpObj : lstObj) {
             /* if (tmpObj.getId() == ObjectId.Water) {
                 if (getBounds().intersects(tmpObj.getBounds())) { // In water
                     swimming = true;
@@ -88,6 +90,7 @@ public abstract class Player extends LivingEntity implements Gunner {
                 if (getBoundsBottom().intersects(tmpObj.getBounds())) {
                     if (velY - tmpObj.getVelY() > 16) { // Maximum ground hit speed
                         hp-= (velY - tmpObj.getVelY());
+                        lstObj.add(new BloodSplatter(this));
                     }
                     y = tmpObj.getY() - (sizeY - (sizeY / 4));
                     velY = 0;
@@ -112,18 +115,26 @@ public abstract class Player extends LivingEntity implements Gunner {
             } 
             else if (tmpObj.getId() == ObjectId.Coin) {
                 if (tmpObj.getBounds().intersects(getBounds())) {
-                    mapObj.remove(tmpObj);
+                    lstObj.remove(tmpObj);
                     coins++;
                 }
             }
             else if (tmpObj.getId() == ObjectId.Mob) {
                 if (tmpObj.getBounds().intersects(getBounds())) {
-                    if (this.isAlive()) tmpObj.setVelX(-tmpObj.getVelX());
-                    hp-=20;
+                    if (this.isAlive() && protection <= 0) {
+                        protection = 15;
+                        hp-=20;
+                        tmpObj.setVelX(-tmpObj.getVelX());
+                        setVelY(-7);
+                        lstObj.add(new BloodSplatter(this));
+                    }
                 }
             }
         }
         if (y > Game.HEIGHT) hp-=0.5;
+        if (protection-- < 0) {
+            protection = 0;
+        }
     }
     
     @Override

@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- * Copyright 2014 Patrick Kerr.
+ * Copyright 2014 Patrick.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,45 +22,45 @@
  * THE SOFTWARE.
  */
 
-package main.framework.accesories;
+package main.framework.gameObjects;
 
-import main.framework.*;
 import java.awt.Graphics;
-import main.framework.gameObjects.projectiles.Rocket;
-import main.graphics.Texture;
-import main.Game;
+import java.awt.Rectangle;
+import java.util.LinkedList;
+import java.util.Random;
+import main.framework.GameObject;
+import main.framework.ObjectId;
+import main.graphics.Animation;
 
 /**
  *
- * @author Patrick Kerr
+ * @author Patrick
  */
-public final class Bazooka extends Weapon {
+public class BloodSplatter extends GameObject {
 
-    private final Texture tex = Game.getTexture();
-    public Bazooka(Gunner shooter, Handler handler) {
-        super(shooter, handler);
-        maxShots = 1;
-        mags = 5;
-        reloadSpeed = 120;
-        reload();
+    private final int r = new Random().nextInt(6);
+    private final Animation splatter = new Animation(7, tex.splatter[r]);
+    private final GameObject host;
+    
+    public BloodSplatter(GameObject host) {
+        super(host.getX(), host.getY(), ObjectId.Null);
+        this.host = host;
     }
 
     @Override
-    public void shoot() {
-        if (super.shoot(new Rocket(shooter.getX(), shooter.getY() + 15, shooter))) {
-            SFX.play("/audio/shot_rocket.wav");
+    public void tick(LinkedList<GameObject> lstObj) {
+        if (splatter.runAnimation() == splatter.getLength() - 1) {
+            lstObj.remove(this);
         }
     }
 
     @Override
-    public void drawMag(Graphics g, int x, int y) {
-        super.drawMag(g, x, y);
-        for (int i = this.getMagSize(); i > 0; i--) { // Show Mags
-            if (i <= this.getShotsLeft()) {
-                g.drawImage(tex.bullet, (i * 20) + x + 10, y, null);
-            } else {
-                g.drawImage(tex.bulletSlot, (i * 20) + x + 10, y, null);
-            }
-        }
+    public void render(Graphics g) {
+        splatter.drawAnimation(g, (int)host.getX(), (int)host.getY(), (int)sizeX, (int)sizeY);
+    }
+
+    @Override
+    public Rectangle getBounds() {
+            return new Rectangle((int)x,(int)y,(int)sizeX,(int)sizeY);
     }
 }

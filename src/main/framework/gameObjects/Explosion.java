@@ -27,7 +27,6 @@ package main.framework.gameObjects;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.util.LinkedList;
-import main.Game;
 import main.framework.*;
 import main.graphics.Animation;
 
@@ -38,7 +37,7 @@ import main.graphics.Animation;
 public final class Explosion extends GameObject {
 
     private final int speed = 1;
-    private final Animation explode = new Animation(speed, tex.explosion[0], tex.explosion[1], tex.explosion[2], tex.explosion[3], tex.explosion[4], tex.explosion[5], tex.explosion[6], tex.explosion[7], tex.explosion[8], tex.explosion[9], tex.explosion[10], tex.explosion[11], tex.explosion[12], tex.explosion[13], tex.explosion[14], tex.explosion[15], tex.explosion[14], tex.explosion[13], tex.explosion[12], tex.explosion[11], tex.explosion[10], tex.explosion[9], tex.explosion[8], tex.explosion[7], tex.explosion[6], tex.explosion[5], tex.explosion[4], tex.explosion[3], tex.explosion[2], tex.explosion[1], tex.explosion[0]);
+    private final Animation explode = new Animation(speed, tex.explosion[3], tex.explosion[4], tex.explosion[5], tex.explosion[6], tex.explosion[7], tex.explosion[8], tex.explosion[9], tex.explosion[10], tex.explosion[11], tex.explosion[12], tex.explosion[13], tex.explosion[14], tex.explosion[15], tex.explosion[14], tex.explosion[13], tex.explosion[12], tex.explosion[11], tex.explosion[10], tex.explosion[9], tex.explosion[8], tex.explosion[7], tex.explosion[6], tex.explosion[5], tex.explosion[4], tex.explosion[3], tex.explosion[2], tex.explosion[1], tex.explosion[0]);
     private GameObject reward = null;
     
     public Explosion(float x, float y) {
@@ -60,11 +59,11 @@ public final class Explosion extends GameObject {
 
     @Override
     public void render(Graphics g) {
-        explode.drawAnimation(g, (int)x, (int)y, Game.scale, Game.scale);
+        explode.drawAnimation(g, (int)x, (int)y, (int)sizeX, (int)sizeY);
     }
 
     @Override
     public Rectangle getBounds() {
-        return new Rectangle((int)x, (int)y, Game.scale, Game.scale);
+        return new Rectangle((int)x, (int)y, (int)sizeX, (int)sizeY);
     }
 }

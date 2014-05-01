@@ -33,7 +33,9 @@ import main.framework.BufferedImageLoader;
  */
 public final class Texture {
     
-    private final SpriteSheet blockSheet, squirrelSheet, coinSheet, numberSheet, healthFrameSheet, healthBarSheet, explosionSheet, skeletonSheet;
+    private final SpriteSheet blockSheet, squirrelSheet, coinSheet, 
+            numberSheet, healthFrameSheet, healthBarSheet, explosionSheet, 
+            skeletonSheet, splatterSheet;
     
     public BufferedImage[] symbol = new BufferedImage[12]; // Numbers 0-9, / & x
     public BufferedImage[] block = new BufferedImage[20]; // Block textures
@@ -42,6 +44,7 @@ public final class Texture {
     public BufferedImage[] coin = new BufferedImage[8]; // Spinning Coin Textures
     
     public BufferedImage[] explosion = new BufferedImage[16];
+    public BufferedImage[] splatter = new BufferedImage[6];
     
     public BufferedImage[] frame = new BufferedImage[6];
     public BufferedImage[] bar = new BufferedImage[6];
@@ -49,6 +52,7 @@ public final class Texture {
     public BufferedImage bullet = null; // Bullet Texture
     public BufferedImage bulletSlot = null; // Bullet Count HUD
     public BufferedImage cloud = null; // Background Cloud
+    
     
     public Texture() {
         BufferedImageLoader loader = new BufferedImageLoader();
@@ -63,10 +67,19 @@ public final class Texture {
         healthFrameSheet = new SpriteSheet(loader.loadImage("/healthbar/frame.png"));
         healthBarSheet = new SpriteSheet(loader.loadImage("/healthbar/bars.png"));
         skeletonSheet = new SpriteSheet(loader.loadImage("/sprite/sprite_skeleton.png"));
+        splatterSheet = new SpriteSheet(loader.loadImage("/sprite/sprite_blood.png"));
         getTextures();
     }
     
     private void getTextures() {   // Texture Loading
+// Blood splatter frames
+        splatter[0] = splatterSheet.grabImage(1, 1, 100, 100);
+        splatter[1] = splatterSheet.grabImage(1, 2, 100, 100);
+        splatter[2] = splatterSheet.grabImage(2, 2, 100, 100);
+        splatter[3] = splatterSheet.grabImage(1, 3, 100, 100);
+        splatter[4] = splatterSheet.grabImage(2, 3, 100, 100);
+        splatter[5] = splatterSheet.grabImage(1, 4, 100, 100);
+
 // Skeleton Frames (Mob)
         skeleton[0] = skeletonSheet.grabImage(2, 1, 32, 32); // Idle
         skeleton[1] = skeletonSheet.grabImage(1, 2, 32, 32);

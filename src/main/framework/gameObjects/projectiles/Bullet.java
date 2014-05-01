@@ -28,8 +28,7 @@ import main.framework.*;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.util.LinkedList;
-import main.framework.gameObjects.LivingEntity;
-import main.framework.gameObjects.Projectile;
+import main.framework.gameObjects.*;
 
 /**
  *
@@ -53,6 +52,7 @@ public final class Bullet extends Projectile {
             if (getBounds().intersects(tmpObj.getBounds())) {
                 if (tmpObj.getId() == ObjectId.Mob) { // Hits a mob
                     // Check if instance of... instead?
+                    lstObj.add(new BloodSplatter(tmpObj));
                     LivingEntity ent = (LivingEntity) tmpObj;
                     ent.wound(4.20f);
                     lstObj.remove(this);
