@@ -42,8 +42,9 @@ public abstract class Weapon {
     private int reloadTimer = 0; // Reloads until hits 0;
     private float ratio;
     
-    protected int cooldown = 10; // (Default) Min. time between shots (in ticks)
+    protected int cooldown = 0; // (Default) Min. time between auto shots (in ticks) // 0 = Manual fire
     private int cdTimer = 0; // Current cooldown timer status
+    protected boolean canShoot = true;
     
     protected final Gunner shooter;
     private final Handler handler;
@@ -58,15 +59,15 @@ public abstract class Weapon {
     protected boolean shoot(GameObject projectile) {
         if (cdTimer < 0) {
             cdTimer = cooldown;
-            if (reloadTimer < 0 && bullets-- > 0) {
-                handler.addObjectLast(projectile);
-    //            if (bullets == 0) {
-    //                reload(40); // AutoReload
-    //            }
-                return true;
-            } else {
-                bullets = 0;
-                SFX.play("/audio/empty_gun.wav");
+            if (canShoot) {
+                canShoot = this.isAuto();
+                if (reloadTimer < 0 && bullets-- > 0) {
+                    handler.addObjectLast(projectile);
+                    return true;
+                } else {
+                    bullets = 0;
+                    SFX.play("/audio/empty_gun.wav");
+                }
             }
         }
         return false;
@@ -121,5 +122,14 @@ public abstract class Weapon {
     }
     public void drawMag(Graphics g, int x, int y) {
         Symbols.drawNumber(g, this.getMagsLeft(), x, y, 32, 32);
+    }
+    public void releaseTrigger() {
+        canShoot = true;
+    }
+    public boolean canShoot() {
+        return canShoot;
+    }
+    public boolean isAuto() {
+        return cooldown != 0;
     }
 }

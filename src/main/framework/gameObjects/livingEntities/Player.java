@@ -40,7 +40,7 @@ import main.framework.gameObjects.*;
 public abstract class Player extends LivingEntity implements Gunner {
     
     protected Weapon[] gun;
-    protected int selectedGun = 0;
+    protected int selectedGun = 1;
     
     protected int facing = 0; // Facing ( - = Left, 0 = Front, + = Right )
     
@@ -172,7 +172,7 @@ public abstract class Player extends LivingEntity implements Gunner {
                 this.setVelY(-10);
                 this.setJumping(true);
             }
-            
+
             if (input.isKeyDown(KeyEvent.VK_SPACE)) {
                 if (this.getFacing() != 0) {
                     this.getSelectedGun().shoot();
@@ -187,6 +187,9 @@ public abstract class Player extends LivingEntity implements Gunner {
                     this.setSelectedGun(1);
                 } else if (input.isKeyUp(KeyEvent.VK_2)) {
                     this.setSelectedGun(2);
+                }
+                if (input.isKeyUp(KeyEvent.VK_SPACE)) {
+                    this.getSelectedGun().releaseTrigger();
                 }
             }
         }
