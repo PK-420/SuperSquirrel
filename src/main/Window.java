@@ -29,7 +29,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
- *
+ * This class is used to create a JFrame that will hold the game canvas
  * @author Patrick Kerr
  */
 public final class Window {

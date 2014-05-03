@@ -29,7 +29,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 /**
- *
+ * This class is used to load an image file into a BufferedImage object
  * @author Patrick Kerr
  */
 public final class BufferedImageLoader {

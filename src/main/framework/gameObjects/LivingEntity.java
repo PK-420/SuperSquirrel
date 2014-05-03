@@ -29,7 +29,6 @@ import main.framework.ObjectId;
 import main.graphics.Animation;
 
 /**
- *
  * @author Patrick Kerr
  */
 public abstract class LivingEntity extends GameObject {

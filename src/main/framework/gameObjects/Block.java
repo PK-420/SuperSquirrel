@@ -30,21 +30,31 @@ import java.util.LinkedList;
 import main.graphics.Animation;
 
 /**
- *
+ * This class represents a static block of the desired texture and ObjectId
  * @author Patrick Kerr
  */
 public final class Block extends GameObject {
     
     private Animation anim;
     
+    /**
+     * Represents the block[type] texture to load
+     */
     protected int type;
 
+    /**
+     * Creates a block object
+     * @param x Horizontal position of the object on the map
+     * @param y Vertical position of the object on the map
+     * @param id ObjectId representing the type of block
+     * @param type integer representing the block[type] texture to load (-1 represents an animated block)
+     */
     public Block (int x, int y, ObjectId id, int type) {
         super(x, y, id);
         this.type = type;
         super.x *= sizeX;
         super.y *= sizeY;
-        if (type == -1) { // Init Animation For Special Blocks
+        if (type == -1) { // Init Animation For Special Blocks // currently only supports water... // add verif. ObjectId before drawing
             anim = new Animation(15, tex.block[16], tex.block[17], tex.block[18]);
             this.type = -1;
         }

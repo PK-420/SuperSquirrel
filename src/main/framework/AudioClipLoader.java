@@ -32,13 +32,18 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
 /**
- *
+ * This class is used to load an audio file into a Clip object
  * @author Patrick Kerr
  */
 public final class AudioClipLoader {
     
     private Clip clip;
     
+    /**
+     * Tries to load resource into a Clip object
+     * @param path Path of the audio clip to be loaded
+     * @return The loaded audio clip if if was successfully loaded
+     */
     public Clip loadSFX(String path) {
         try {
             // getAudioInputStream() also accepts a File or InputStream

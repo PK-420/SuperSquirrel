@@ -46,7 +46,6 @@ public final class Animation {
      * @param speed Animation speed, More = Slower; Fastest = 1;
      * @param args As many BufferedImages as needed for the animation
      */
-        
     public Animation(int speed, BufferedImage... args) {
         this.speed = speed;
         images = new BufferedImage[args.length];
@@ -57,6 +56,7 @@ public final class Animation {
     
     /**
      * Runs the animation (Preferably during the tick method)
+     * @return The current frame index
      */
     public int runAnimation() {
         index++;

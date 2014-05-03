@@ -31,7 +31,7 @@ import main.framework.*;
 import main.graphics.Animation;
 
 /**
- *
+ * This class represents an explosion effect
  * @author Patrick Kerr
  */
 public final class Explosion extends GameObject {
@@ -40,10 +40,20 @@ public final class Explosion extends GameObject {
     private final Animation explode = new Animation(speed, tex.explosion[3], tex.explosion[4], tex.explosion[5], tex.explosion[6], tex.explosion[7], tex.explosion[8], tex.explosion[9], tex.explosion[10], tex.explosion[11], tex.explosion[12], tex.explosion[13], tex.explosion[14], tex.explosion[15], tex.explosion[14], tex.explosion[13], tex.explosion[12], tex.explosion[11], tex.explosion[10], tex.explosion[9], tex.explosion[8], tex.explosion[7], tex.explosion[6], tex.explosion[5], tex.explosion[4], tex.explosion[3], tex.explosion[2], tex.explosion[1], tex.explosion[0]);
     private GameObject reward = null;
     
+    /**
+     * Creates a new Explosion effect that needs to be added to the handler list so it can tick and be destroyed once the animation ends
+     * @param x Horizontal position of the object on the map
+     * @param y Vertical position of the object on the map
+     */
     public Explosion(float x, float y) {
         super(x, y, ObjectId.Null);
     }
-    
+    /**
+     * Creates a new Explosion effect that needs to be added to the handler list so it can tick and be destroyed once the animation ends
+     * @param x Horizontal position of the object on the map
+     * @param y Vertical position of the object on the map 
+     * @param reward Game object to spawn at the end of the explosion
+     */
     public Explosion(float x, float y, GameObject reward) {
         super(x, y, ObjectId.Null);
         this.reward = reward;

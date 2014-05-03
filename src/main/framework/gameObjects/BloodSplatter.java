@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- * Copyright 2014 Patrick.
+ * Copyright 2014 Patrick Kerr.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -33,8 +33,8 @@ import main.framework.ObjectId;
 import main.graphics.Animation;
 
 /**
- *
- * @author Patrick
+ * This represents a blood splatter effect
+ * @author Patrick Kerr
  */
 public class BloodSplatter extends GameObject {
 
@@ -42,6 +42,10 @@ public class BloodSplatter extends GameObject {
     private final Animation splatter = new Animation(7, tex.splatter[r]);
     private final GameObject host;
     
+    /**
+     * Creates a BloodSplatter effect that needs to be added to the handler list so it can tick and be destroyed once the animation ends
+     * @param host Entity that will bleed
+     */
     public BloodSplatter(GameObject host) {
         super(host.getX(), host.getY(), ObjectId.Null);
         this.host = host;

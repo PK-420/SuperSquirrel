@@ -27,7 +27,7 @@ package main.framework;
 import javax.sound.sampled.Clip;
 
 /**
- *
+ * This class is used to play sound effects
  * @author Patrick Kerr
  */
 public final class SFX {

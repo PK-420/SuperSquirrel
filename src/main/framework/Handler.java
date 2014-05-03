@@ -30,7 +30,8 @@ import java.util.LinkedList;
 import main.framework.gameObjects.livingEntities.Player;
 
 /**
- *
+ * This class handles a list of objects to tick and render
+ * Also handles the player
  * @author Patrick Kerr
  */
 public final class Handler {
@@ -124,6 +125,9 @@ public final class Handler {
         this.player = null;
     }
 
+    /**
+     * Removes all the mapObjects and player
+     */
     public void clear() {
         this.mapObjects.clear();
         this.player = null;

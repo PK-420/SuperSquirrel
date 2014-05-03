@@ -25,7 +25,7 @@
 package main.framework;
 
 /**
- *
+ * For a GameObject to be able to fire a Weapon()
  * @author Patrick Kerr
  */
 public interface Gunner {

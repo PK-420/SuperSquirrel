@@ -30,22 +30,48 @@ import java.awt.Graphics;
 import main.graphics.hudObjects.Symbols;
 
 /**
- *
+ * Root class of every weapon
+ * needs to be ticked and rendered
  * @author Patrick Kerr
  */
 public abstract class Weapon {
-    protected int maxShots = 0; // Mag capacity
-    protected int bullets = 0; // Bullets left
-    protected int mags = 0; // Mags left
-    protected int reloadSpeed = 40; // Default reload speed
-    protected int reloadBarLength = 40; // Default reload bar length
+
+    /**
+     * Magazine capacity
+     */
+    protected int maxShots = 0;
+
+    /**
+     *  Bullets left
+     */
+    protected int bullets = 0; 
+
+    /**
+     * Magazines left
+     */
+    protected int mags = 0;
+
+    /**
+      * Reload speed
+     */
+    protected int reloadSpeed = 40; // Default 
+
+    private final int reloadBarLength = 40; // Default reload bar length
     private int reloadTimer = 0; // Reloads until hits 0;
     private float ratio;
     
-    protected int cooldown = 0; // (Default) Min. time between auto shots (in ticks) // 0 = Manual fire
+    /**
+     * Must be greater or equals to 0;
+     * If greater than 0, is the minimum time between automatic shots (in ticks)
+     * If equals 0, is considered like a single fire weapon (Must pull the trigger again to fire)
+     */
+    protected int cooldown = 0; // (Default) 
     private int cdTimer = 0; // Current cooldown timer status
-    protected boolean canShoot = true;
+    private boolean canShoot = true;
     
+    /**
+     * Represents the entity holding the weapon
+     */
     protected final Gunner shooter;
     private final Handler handler;
     
@@ -54,8 +80,16 @@ public abstract class Weapon {
         this.shooter = shooter;
     }
     
+    /**
+     * Required public method to shoot
+     */
     public abstract void shoot();
     
+    /**
+     * Method to shoot, used by the child only
+     * @param projectile Type of GameObject to throw
+     * @return True if it was able to shoot, else false;
+     */
     protected boolean shoot(GameObject projectile) {
         if (cdTimer < 0) {
             cdTimer = cooldown;
@@ -72,6 +106,9 @@ public abstract class Weapon {
         }
         return false;
     }
+    /**
+     * Public method used to reload the weapon
+     */
     public void reload() {
         ratio = (float)reloadBarLength / (float)reloadSpeed;
         if (reloadTimer < 0 && bullets < maxShots && mags > 0) {
@@ -80,6 +117,9 @@ public abstract class Weapon {
         }
     }
     
+    /**
+     * Public method used to update the timers
+     */
     public void tick() {
         cdTimer--;
         if (reloadTimer == 0) {
@@ -94,6 +134,10 @@ public abstract class Weapon {
         }
     }
     
+    /**
+     * Public method used to draw the reload bar over the entity when needed
+     * @param g Graphics on which to draw
+     */
     public void render (Graphics g) {
         if (reloadTimer >= 0) { // Show Reload Bar
             g.setColor(Color.BLACK);
@@ -111,24 +155,53 @@ public abstract class Weapon {
         }
     }
     
+    /**
+     * @return Number of projectiles left in the magazine
+     */
     public int getShotsLeft() {
         return bullets;
     }
+
+    /**
+     * @return Number of magazine carried with the weapon
+     */
     public int getMagsLeft() {
         return mags;
     }
+
+    /**
+     * @return Size of the magazines
+     */
     public int getMagSize() {
         return maxShots;
     }
+
+    /**
+     * Draws the magazine counter
+     * @param g Graphics on which to draw
+     * @param x Horizontal position to start drawing
+     * @param y Vertical position to start drawing
+     */
     public void drawMag(Graphics g, int x, int y) {
         Symbols.drawNumber(g, this.getMagsLeft(), x, y, 32, 32);
     }
+    /**
+     * Releases the trigger on the weapon (Setting canShoot to true)
+     */
     public void releaseTrigger() {
         canShoot = true;
     }
+
+    /**
+     * @return True if the weapon is ready to shoot, else false;
+     */
     public boolean canShoot() {
         return canShoot;
     }
+
+    /**
+     * @return True if the gun is automatic, else false;
+     */
     public boolean isAuto() {
         return cooldown != 0;
     }

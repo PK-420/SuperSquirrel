@@ -32,7 +32,7 @@ import main.framework.gameObjects.livingEntities.Skeleton;
 import main.framework.gameObjects.livingEntities.Squirrel;
 
 /**
- *
+ * This class is used to load a level into an Handler by converting a BufferedImage into objects (pixel by pixel)
  * @author Patrick Kerr
  */
 public final class Level {
@@ -102,9 +102,7 @@ public final class Level {
                 
                 if (red == 255 && green == 128 && blue == 0) handler.addObject(new Coin(xx * Game.scale, yy * Game.scale, 7)); // Coin
                 
-                if (red == 0 && green == 0 && blue == 0) {
-                    handler.addObjectLast(new Skeleton(xx, yy));
-                } // Mob
+                if (red == 0 && green == 0 && blue == 0) handler.addObjectLast(new Skeleton(xx, yy)); // Mob
                 
                 ////////////////// To be Added (RGB) /////////////////////
                 // 255 0 0 : Fire
@@ -112,7 +110,6 @@ public final class Level {
                 // 128 128 0 : Door
                 // 192 128 0 : Flag
                 // 255 128 0 : Coin
-                // 0 0 0 : Mob
                 // ? ? ? : Special "?" Block
                 //////////////////////////////////////////////////////////
             }

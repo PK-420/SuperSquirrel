@@ -31,13 +31,19 @@ import java.util.LinkedList;
 import main.graphics.Animation;
 
 /**
- *
+ * This class represents a spinning Coin object that the player can catch
  * @author Patrick Kerr
  */
 public final class Coin extends GameObject {
 
     private final Animation spin;
     
+    /**
+     * Creates a new Coin object
+     * @param x Horizontal position of the object on the map
+     * @param y Vertical position of the object on the map
+     * @param spinSpeed Speed at which this coin should spin
+     */
     public Coin(int x, int y, int spinSpeed) {
         super(x, y, ObjectId.Coin);
         spin = new Animation(spinSpeed, tex.coin[0], tex.coin[1], tex.coin[2], tex.coin[3], tex.coin[4], tex.coin[5], tex.coin[6], tex.coin[7]);

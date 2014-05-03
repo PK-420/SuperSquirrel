@@ -28,7 +28,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 /**
- *
+ * Use this class to listen to keyboard inputs
  * @author Patrick Kerr
  */
 public final class GameKeyInput implements KeyListener {
@@ -103,27 +103,33 @@ public final class GameKeyInput implements KeyListener {
 //        }
     }
 
+    /**
+     * Checks if the specified key is currently pressed
+     * @param k Key to be checked
+     * @return True if k is down, else false;
+     */
     public boolean isKeyDown(int k) {
         return keyDown[k];
     }
-    
+    /**
+     * Checks if the specified key is currently released
+     * @param k Key to be checked
+     * @return True if k is up, else false;
+     */
     public boolean isKeyUp(int k) {
         return keyUp[k];
     }
     
+    /**
+     * @return True if any Key was pressed
+     */
     public boolean isKeyPressed() {
         return keyPressed;
     }
-    
-    public void setKeyPressed(boolean keyPressed) {
-        this.keyPressed = keyPressed;
-    }
-    
+    /**
+     * @return True if any Key was released since the last update();
+     */
     public boolean isKeyReleased() {
         return keyReleased;
-    }
-    
-    public void setKeyReleased(boolean keyReleased) {
-        this.keyReleased = keyReleased;
     }
 }

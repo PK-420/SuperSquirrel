@@ -25,11 +25,12 @@
 package main.framework;
 
 /**
- *
+ * This enumerates all the possible GameObject Id
  * @author Patrick Kerr
  */
 
 public enum ObjectId {
+    Null,
     Player,
     Bullet,
     Stone, 
@@ -44,6 +45,5 @@ public enum ObjectId {
     Flag,
     Coin,
     Fern,
-    Mob,
-    Null;
+    Mob;
 }

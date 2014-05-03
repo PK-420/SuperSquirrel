@@ -31,12 +31,18 @@ import main.graphics.Texture;
 import main.Game;
 
 /**
- *
- * @author Patrick
+ * This class represents a semi-auto Pistol object
+ * @author Patrick Kerr
  */
 public final class Pistol extends Weapon {
 
     private final Texture tex = Game.getTexture();
+    
+    /**
+     * Creates a pistol object (Weapon)
+     * @param shooter Entity that will use this weapon
+     * @param handler Handler to which to add the bullets fired
+     */
     public Pistol(Gunner shooter, Handler handler) {
         super(shooter, handler);
         maxShots = 11;

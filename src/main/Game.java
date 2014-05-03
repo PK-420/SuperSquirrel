@@ -36,7 +36,10 @@ import java.util.Random;
 import javax.swing.JOptionPane;
 
 /**
- *
+ * The Game class is the main class which runs the game thread;
+ * the game loop regulates the speed of the game to tick at the "tps" value specified,
+ * the rendering occurs as often as possible, so you should get more Frames/s than Ticks/s
+ * This class also listens for keyboard input
  * @author Patrick Kerr
  */
 public final class Game extends Canvas implements Runnable {

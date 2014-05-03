@@ -31,12 +31,18 @@ import main.graphics.Texture;
 import main.Game;
 
 /**
- *
+ * This class represents a Rocket Launcher object
  * @author Patrick Kerr
  */
 public final class Bazooka extends Weapon {
 
     private final Texture tex = Game.getTexture();
+
+    /**
+     * Creates a rocket launcher object (Weapon)
+     * @param shooter Entity that will use this weapon
+     * @param handler Handler to which to add the bullets fired
+     */
     public Bazooka(Gunner shooter, Handler handler) {
         super(shooter, handler);
         maxShots = 1;

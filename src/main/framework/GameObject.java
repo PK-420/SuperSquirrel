@@ -31,7 +31,8 @@ import main.graphics.Texture;
 import main.Game;
 
 /**
- *
+ * Root class of every object that will be ticked and rendered by the handler list
+ * Contains methods and attributes that are needed for collision detection and "physics"
  * @author Patrick Kerr
  */
 public abstract class GameObject {
