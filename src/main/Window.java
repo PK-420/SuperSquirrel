@@ -26,6 +26,7 @@ package main;
 
 import java.awt.Dimension;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -52,7 +53,7 @@ public final class Window {
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
-//        JOptionPane.showMessageDialog(game, "Welcome to my platformer game prototype\nwhere the only goal is to have fun!\n\nPress F1 at anytime to get help :)");
+        JOptionPane.showMessageDialog(game, "Welcome to my platformer game prototype\nwhere the only goal is to have fun!\n\nPress F1 at anytime to get help :)");
         game.start();
     }
 }
