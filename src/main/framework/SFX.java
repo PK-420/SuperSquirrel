@@ -47,7 +47,7 @@ public final class SFX {
     /**
      * Plays the specified sound for x times
      * @param path Path to the sound clip
-     * @param x Numbers of time to loop (x > 0)
+     * @param x Numbers of time to loop (x must be greater than 0)
      */
     public static void play(String path, int x) {
         if (x > 0) {
