@@ -24,6 +24,7 @@
 
 package main.framework.gameObjects;
 
+import main.Game;
 import main.framework.GameObject;
 import main.framework.ObjectId;
 import main.graphics.Animation;
@@ -64,6 +65,19 @@ public abstract class LivingEntity extends GameObject {
     @Override
     public void tick() {
         super.tick();
+        if (sliding) {
+                drag = 0.04f; // Icy Ground
+            } else {
+                if (jumping) { // Air Friction
+                    drag = 0.025f;
+                } else { // Ground 
+                    drag = 0.975f;
+                }
+            }
+        velX *= (1 - drag);
+        if ((velX < 0.01 && velX >= 0) || (velX > -0.01 && velX <= 0)) {
+            velX = 0;
+        }
         if (jumping || falling) {
                 velY += gravity;
                 if (velY > tVel) {
@@ -85,6 +99,7 @@ public abstract class LivingEntity extends GameObject {
                 }
             }
         }
+        if (y > Game.HEIGHT) hp-=0.5;
     }
     
     /**

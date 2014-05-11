@@ -53,6 +53,7 @@ public final class Skeleton extends LivingEntity {
     public void tick(LinkedList<GameObject> lstObj) {
         super.tick();
         if (this.isAlive()) {
+            velX = Math.signum(velX) * 3;
             walkLeft.runAnimation();
             walkRight.runAnimation();
             for (GameObject tmpObj : lstObj) {

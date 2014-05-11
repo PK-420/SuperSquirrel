@@ -30,7 +30,6 @@ import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.util.LinkedList;
 import main.framework.accesories.Weapon;
-import main.Game;
 import main.framework.gameObjects.*;
 
 /**
@@ -40,7 +39,7 @@ import main.framework.gameObjects.*;
 public abstract class Player extends LivingEntity implements Gunner {
     
     protected Weapon[] gun;
-    protected int selectedGun = 1;
+    protected int selectedGun = 0;
     
     protected int facing = 0; // Facing ( - = Left, 0 = Front, + = Right )
     
@@ -54,20 +53,7 @@ public abstract class Player extends LivingEntity implements Gunner {
     
     @Override
     public void tick(LinkedList<GameObject> lstObj) {
-        super.tick();
-        if (sliding) {
-                drag = 0.04f; // Icy Ground
-            } else {
-                if (jumping) { // Air Friction
-                    drag = 0.025f;
-                } else { // Ground 
-                    drag = 0.975f;
-                }
-            }
-        velX *= (1 - drag);
-        if ((velX < 1 && velX >= 0) || (velX > -1 && velX <= 0)) {
-            velX = 0;
-        }
+        super.tick();        
         gun[selectedGun].tick();
         for (GameObject tmpObj : lstObj) {
             /* if (tmpObj.getId() == ObjectId.Water) {
@@ -88,10 +74,6 @@ public abstract class Player extends LivingEntity implements Gunner {
                     tmpObj.getId() == ObjectId.Stone ||
                     tmpObj.getId() == ObjectId.Ice) { //Solid Block Collision
                 if (getBoundsBottom().intersects(tmpObj.getBounds())) {
-                    if (velY - tmpObj.getVelY() > 16) { // Maximum ground hit speed
-                        hp-= (velY - tmpObj.getVelY());
-                        lstObj.add(new BloodSplatter(this));
-                    }
                     y = tmpObj.getY() - (sizeY - (sizeY / 4));
                     velY = 0;
                     falling = false;
@@ -131,7 +113,6 @@ public abstract class Player extends LivingEntity implements Gunner {
                 }
             }
         }
-        if (y > Game.HEIGHT) hp-=0.5;
         if (protection-- < 0) {
             protection = 0;
         }
