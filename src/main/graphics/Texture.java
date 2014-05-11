@@ -28,7 +28,7 @@ import java.awt.image.BufferedImage;
 import main.framework.BufferedImageLoader;
 
 /**
- *
+ * This class is used to load all the textures into memory
  * @author Patrick Kerr
  */
 public final class Texture {
@@ -37,23 +37,66 @@ public final class Texture {
             numberSheet, healthFrameSheet, healthBarSheet, explosionSheet, 
             skeletonSheet, splatterSheet;
     
-    public BufferedImage[] symbol = new BufferedImage[12]; // Numbers 0-9, / & x
-    public BufferedImage[] block = new BufferedImage[20]; // Block textures
-    public BufferedImage[] squirrel = new BufferedImage[54]; // Player textures
+    /**
+     * Numbers 0-9, / and x
+     */
+    public BufferedImage[] symbol = new BufferedImage[12];
+
+    /**
+     * Block textures
+     */
+    public BufferedImage[] block = new BufferedImage[20];
+
+    /**
+     * Player textures
+     */
+    public BufferedImage[] squirrel = new BufferedImage[54]; 
+
+    /**
+     * Skeleton mob textures
+     */
     public BufferedImage[] skeleton = new BufferedImage[7];
-    public BufferedImage[] coin = new BufferedImage[8]; // Spinning Coin Textures
+    /**
+     * Spinning Coin Textures
+     */
+    public BufferedImage[] coin = new BufferedImage[8];
     
+    /**
+     * Explosion Textures
+     */
     public BufferedImage[] explosion = new BufferedImage[16];
+
+    /**
+     * Blood Splatter Textures
+     */
     public BufferedImage[] splatter = new BufferedImage[6];
     
+    /**
+     * Health bar Frame Textures
+     */
     public BufferedImage[] frame = new BufferedImage[6];
+
+    /**
+     * Health bar Bar Textures
+     */
     public BufferedImage[] bar = new BufferedImage[6];
     
-    public BufferedImage bullet = null; // Bullet Texture
-    public BufferedImage bulletSlot = null; // Bullet Count HUD
-    public BufferedImage cloud = null; // Background Cloud
+    /**
+     * Bullet texture
+     */
+    public BufferedImage bullet = null;
+    /**
+     * Bullet Count HUD
+     */
+    public BufferedImage bulletSlot = null;
+    /**
+     * Background Cloud
+     */
+    public BufferedImage cloud = null;
     
-    
+    /**
+     * Creates all the textures needed for the game
+     */
     public Texture() {
         BufferedImageLoader loader = new BufferedImageLoader();
         cloud = loader.loadImage("/img/cloud2.png");

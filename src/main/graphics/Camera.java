@@ -28,7 +28,7 @@ import main.framework.GameObject;
 import main.Game;
 
 /**
- *
+ * This class is used to move the view smoothly, following the player
  * @author Patrick Kerr
  */
 public final class Camera {
@@ -55,16 +55,17 @@ public final class Camera {
         }
     }
 
+    /**
+     * @return The current horizontal position of the camera
+     */
     public float getX() {
         return x;
     }
-    public void setX(float x) {
-        this.x = x;
-    }
+    
+    /**
+     * @return The current vertical position of the camera
+     */
     public float getY() {
         return y;
     }
-    public void setY(float y) {
-        this.y = y;
-    }   
 }

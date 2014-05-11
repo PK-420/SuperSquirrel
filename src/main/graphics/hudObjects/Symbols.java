@@ -28,7 +28,7 @@ import main.graphics.Texture;
 import main.Game;
 
 /**
- *
+ * This class is used to draw Symbols and numbers for the HUD
  * @author Patrick Kerr
  */
 public final class Symbols {
@@ -53,26 +53,26 @@ public final class Symbols {
             g.drawImage(tex.symbol[number], x, y, sizeX, sizeY, null);
         }
     }
-    public static void drawNumber(Graphics g, int number, int x, int y) {
-        // Draw the selected symbol original sized
-        if (number > 9) { // Draw 2 digits
-//            g.drawImage(tex.symbol[symbol / 10], x, y + 8, 16, 16, null);
-            g.drawImage(tex.symbol[number % 10], x, y, null);
-            drawNumber(g, number / 10, x - 32, y);
-        }
-        else if (number >= 0) { // Draw 1 digit
-            g.drawImage(tex.symbol[number], x, y, 32, 32, null);
-        }
-    }
-    public static void drawMultiplier(Graphics g, int x, int y) {
-        g.drawImage(tex.symbol[11], x, y, null);
-    }
+
+    /**
+     * Draws a multiplier symbol ( x ) on the screen
+     * @param g Graphics on which to draw
+     * @param x Horizontal position of the last digit, extra digits added to the left
+     * @param y Vertical position of the symbol
+     * @param sizeX Horizontal size
+     * @param sizeY Vertical Size
+     */
     public static void drawMultiplier(Graphics g, int x, int y, int sizeX, int sizeY) {
         g.drawImage(tex.symbol[11], x, y, sizeX, sizeY, null);
     }
-    public static void drawDivider(Graphics g, int x, int y) {
-        g.drawImage(tex.symbol[10], x, y, null);
-    }
+    /**
+     * Draws a divider symbol ( / ) on the screen
+     * @param g Graphics on which to draw
+     * @param x Horizontal position of the last digit, extra digits added to the left
+     * @param y Vertical position of the symbol
+     * @param sizeX Horizontal size
+     * @param sizeY Vertical Size
+     */
     public static void drawDivider(Graphics g, int x, int y, int sizeX, int sizeY) {
         g.drawImage(tex.symbol[10], x, y, sizeX, sizeY, null);
     }

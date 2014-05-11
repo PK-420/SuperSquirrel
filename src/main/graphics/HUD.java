@@ -32,7 +32,7 @@ import main.graphics.hudObjects.StatusBar.Align;
 import main.Game;
 
 /**
- *
+ * This class is used to draw the Head Up Display (HUD)
  * @author Patrick Kerr
  */
 public final class HUD {
@@ -42,15 +42,27 @@ public final class HUD {
     private final Game game;
     private final Handler handler;
     
+    /**
+     * Creates a new HUD
+     * @param game Game that will be used for some debug information overlay
+     * @param handler Handler that contains the player and other objects
+     */
     public HUD(Game game, Handler handler) {
         this.game = game;
         this.handler = handler;
     }
     
+    /**
+     * Tick method that needs to be called to update animations
+     */
     public void tick() {
         CoinCounter.tick();
     }
     
+    /**
+     * Renders the HUD Objects
+     * @param g Graphics on which to render the HUD
+     */
     public void render(Graphics g) {
         if (handler.player != null) { // Player HUD
             CoinCounter.draw(g, handler.player, Game.WIDTH - 10, 10, 30);
@@ -68,6 +80,9 @@ public final class HUD {
         }
     }
     
+    /**
+     * Method called to turn on/off the debug overlay
+     */
     public void toggleDebugInfo() {
         showDebug = !showDebug;
     }

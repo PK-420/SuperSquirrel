@@ -30,14 +30,26 @@ import main.graphics.Texture;
 import main.Game;
 
 /**
- *
+ * This class is used to draw a StatusBar for the HUD
  * @author Patrick Kerr
  */
 public final class StatusBar {
     private final static Texture tex = Game.getTexture();
     
+    /**
+     * Represents the alignment options
+     */
     public enum Align{Left, Right}
 
+    /**
+     *
+     * @param g Graphics on which to draw
+     * @param e Living entity to take data from
+     * @param x Horizontal position to draw the counter
+     * @param y Vertical position to draw the counter
+     * @param size Size of the counter
+     * @param a Alignment of the counter (Which side will the avatar be displayed)
+     */
     public static void draw(Graphics g, LivingEntity e, int x, int y, int size, Align a) {
         switch (a) {
             case Left :
@@ -49,6 +61,15 @@ public final class StatusBar {
         }
     }
     
+    /**
+     * Draws a StatusBar for two entities
+     * @param g Graphics on which to draw
+     * @param e1 First living entity to take data from (Will be displayed left)
+     * @param e2 Second living entity to take data from (Will be displayed Right)
+     * @param x Horizontal position to draw the counter (From its center)
+     * @param y Vertical position to draw the counter
+     * @param size Size of the counter
+     */
     public static void draw(Graphics g, LivingEntity e1, LivingEntity e2, int x, int y, int size) {
         // Entity 2
         drawLeftToRight(g, e2, x - (15 * size), y, size);

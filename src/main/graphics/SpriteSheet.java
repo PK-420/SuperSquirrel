@@ -27,7 +27,7 @@ package main.graphics;
 import java.awt.image.BufferedImage;
 
 /**
- *
+ * This class is used to cut sprite sheets into smaller images
  * @author Patrick Kerr
  */
 public final class SpriteSheet {
