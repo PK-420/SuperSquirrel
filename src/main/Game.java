@@ -74,6 +74,7 @@ public final class Game extends Canvas implements Runnable {
     public int ups;
     
     private boolean running = false;
+    private static boolean paused = false;
     private Thread thread;
     private GameKeyInput input;
     private Level level;
@@ -153,7 +154,8 @@ public final class Game extends Canvas implements Runnable {
             d += (now - lastTime) / ns;
             lastTime = now;
             while (d >= 1) {
-                tick();
+                if (!paused) tick();
+                pollKeyboard();
                 updates++;
                 d--;
             }
@@ -172,10 +174,8 @@ public final class Game extends Canvas implements Runnable {
     
     private void tick() {
         hud.tick();
-        pollKeyboard();
         handler.tick(input);
         cam.tick(handler.player);
-        input.update();
     }
     
     private void render() {
@@ -204,8 +204,13 @@ public final class Game extends Canvas implements Runnable {
         bs.show();
     }
     
+    public static boolean isPaused() {
+        return paused;
+    }
+   
     private void pollKeyboard() {
         if (input.isKeyReleased()) {
+            if (input.isKeyUp(KeyEvent.VK_P) || input.isKeyUp(KeyEvent.VK_PAUSE)) paused = !paused; // P = Pause Game
             if (input.isKeyUp(KeyEvent.VK_F1)) { // Help Popup
                 Thread t = new Thread() {
                     @Override
@@ -231,5 +236,6 @@ public final class Game extends Canvas implements Runnable {
                 level = new Level(loader.loadImage("/level/flat.png"), handler);
             }
         }
+        input.update();
     }
 }
