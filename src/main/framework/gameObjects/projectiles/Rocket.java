@@ -31,18 +31,19 @@ import java.util.LinkedList;
 import main.framework.gameObjects.*;
 
 /**
- *
+ * This class represents a Rocket projectile
  * @author Patrick Kerr
  */
 public final class Rocket extends Projectile {
-    
-    private final Gunner host;
 
+    /**
+     * Creates a Rocket Projectile
+     * @param host Gunner that will fire the Rocket
+     */
     public Rocket(Gunner host) {
         super(host);
         this.sizeX = 20;
         this.sizeY = 16;
-        this.host = host;
         velX = 8 * host.getFacing();
     }
 

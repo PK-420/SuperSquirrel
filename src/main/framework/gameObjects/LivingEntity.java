@@ -30,6 +30,7 @@ import main.framework.ObjectId;
 import main.graphics.Animation;
 
 /**
+ * This class is the parent of any living entity, it mainly regulates Movement Speed, Health and Air
  * @author Patrick Kerr
  */
 public abstract class LivingEntity extends GameObject {
@@ -48,8 +49,15 @@ public abstract class LivingEntity extends GameObject {
     protected boolean sliding = false;
     protected boolean swimming = false;
     private final float maxAir = 100f;
+
+    /**
+     * Represents the time left holding its breath before it takes damage
+     */
     protected float air = maxAir;
     
+    /**
+     * This animation is required for the HUD Health bar, Needs to be ticked.
+     */
     protected Animation avatar;
     
     /**
@@ -66,14 +74,14 @@ public abstract class LivingEntity extends GameObject {
     public void tick() {
         super.tick();
         if (sliding) {
-                drag = 0.04f; // Icy Ground
-            } else {
-                if (jumping) { // Air Friction
-                    drag = 0.025f;
-                } else { // Ground 
-                    drag = 0.975f;
-                }
+            drag = 0.04f; // Icy Ground
+        } else {
+            if (jumping) { // Air Friction
+                drag = 0.025f;
+            } else { // Ground 
+                drag = 0.975f;
             }
+        }
         velX *= (1 - drag);
         if ((velX < 0.01 && velX >= 0) || (velX > -0.01 && velX <= 0)) {
             velX = 0;
@@ -215,14 +223,23 @@ public abstract class LivingEntity extends GameObject {
         this.falling = falling;
     }
     
+    /**
+     * @return Quantity of air left
+     */
     public float getAir() {
         return air;
     }
     
+    /**
+     * @return Maximum air that can be used
+     */
     public float getMaxAir() {
         return maxAir;
     }
     
+    /**
+     * @return The Avatar animation, used for the HUD
+     */
     public Animation getAvatar() {
         return avatar;
     }

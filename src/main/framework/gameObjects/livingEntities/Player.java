@@ -28,25 +28,44 @@ import main.framework.*;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import main.framework.accesories.Weapon;
 import main.framework.gameObjects.*;
 
 /**
- *
+ * Parent class of the player entity
  * @author Patrick Kerr
  */
 public abstract class Player extends LivingEntity implements Gunner {
     
-    protected Weapon[] gun;
+    /**
+     * Array of weapons that the player has in inventory
+     */
+    protected ArrayList<Weapon> gun = new ArrayList<>();
+
+    /**
+     * Represents the currently selected gun in the array
+     */
     protected int selectedGun = 0;
     
-    protected int facing = 0; // Facing ( - = Left, 0 = Front, + = Right )
+    /**
+     * Represents the direction that the player is looking ( -1 = Left, 0 = Front, +1 = Right )
+     */
+    protected int facing = 0;
     
+    /**
+     * Represents the quantity of coins collected by the player
+     */
     protected int coins = 0;
     
     private int protection = 0;
     
+    /**
+     * Creates a player
+     * @param x Horizontal position to spawn the player
+     * @param y Vertical position to spawn the player
+     */
     public Player(float x, float y) {
         super(x, y, ObjectId.Player);
     }
@@ -54,7 +73,7 @@ public abstract class Player extends LivingEntity implements Gunner {
     @Override
     public void tick(LinkedList<GameObject> lstObj) {
         super.tick();        
-        gun[selectedGun].tick();
+        gun.get(selectedGun).tick();
         for (GameObject tmpObj : lstObj) {
             /* if (tmpObj.getId() == ObjectId.Water) {
                 if (getBounds().intersects(tmpObj.getBounds())) { // In water
@@ -120,9 +139,13 @@ public abstract class Player extends LivingEntity implements Gunner {
     
     @Override
     public void render(Graphics g) {
-        gun[selectedGun].render(g);
+        gun.get(selectedGun).render(g);
     }
     
+    /**
+     * Controls the entity according to the user's key presses
+     * @param input GameKeyInput it should listen to
+     */
     public void processInput(GameKeyInput input) {
         if (this.isAlive()) {
             if (input.isKeyPressed()) {
@@ -176,9 +199,28 @@ public abstract class Player extends LivingEntity implements Gunner {
         }
     }
     
+    /**
+     * This is a required method for collision detection
+     * @return The top collision box of the player
+     */
     public abstract Rectangle getBoundsTop();
+
+    /**
+     * This is a required method for collision detection
+     * @return The bottom collision box of the player
+     */
     public abstract Rectangle getBoundsBottom();
+
+    /**
+     * This is a required method for collision detection
+     * @return The left collision box of the player
+     */
     public abstract Rectangle getBoundsLeft();
+
+    /**
+     * This is a required method for collision detection
+     * @return The right collision box of the player
+     */
     public abstract Rectangle getBoundsRight();
     
     @Override
@@ -186,27 +228,44 @@ public abstract class Player extends LivingEntity implements Gunner {
         return facing;
     }
     
+    /**
+     * Sets which way the entity is facing
+     * @param facing integer representing the direction ( -1 = Left, 0 = Front, +1 = Right )
+     */
     public void setFacing(int facing) {
         this.facing = facing;
     }
     
+    /**
+     * Sets the horizontal speed of the player
+     * @param velX Absolute value representing the speed in pixels/tick (will be multiplied with facing to set direction)
+     */
     public void setVelX(int velX) {
         this.velX = Math.abs(velX) * this.facing;
     }
     
+    /**
+     * @return The quantity of coins collected
+     */
     public int getCoinCount() {
         return coins;
     }
     
+    /**
+     * @return The currently selected gun
+     */
     public Weapon getSelectedGun() {
-        return gun[selectedGun];
+        return gun.get(selectedGun);
     }
     
+    /**
+     * Selects a gun from the weapon inventory
+     * @param gun Integer representing the position of the gun in the inventory
+     */
     public void setSelectedGun(int gun) {
-        if (gun <= this.gun.length && gun > 0) {
+        if (gun <= this.gun.size() && gun > 0) {
             this.selectedGun = gun - 1;
-        }
-        else {
+        } else {
             this.selectedGun = 0;
         }
     }

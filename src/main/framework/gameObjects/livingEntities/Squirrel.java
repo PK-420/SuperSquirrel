@@ -32,7 +32,7 @@ import java.util.LinkedList;
 import main.graphics.Animation;
 
 /**
- *
+ * This class represents the main character of the game
  * @author Patrick Kerr
  */
 public final class Squirrel extends Player {
@@ -48,11 +48,16 @@ public final class Squirrel extends Player {
     private final Animation eat = new Animation(10, tex.squirrel[31], tex.squirrel[32], tex.squirrel[33], tex.squirrel[34], tex.squirrel[35], tex.squirrel[36], tex.squirrel[37], tex.squirrel[38]);
     private final Animation dead = new Animation(10, tex.squirrel[39], tex.squirrel[40]);
         
+    /**
+     * Creates the squirrel
+     * @param x Horizontal position to spawn the Player
+     * @param y Vertical position to spawn the Player
+     * @param handler
+     */
     public Squirrel(float x, float y, Handler handler) {
         super(x, y);
-        gun = new Weapon[2];
-        gun[0] = new Pistol(this, handler);
-        gun[1] = new Bazooka(this, handler);
+        gun.add(new Pistol(this, handler));
+        gun.add(new Bazooka(this, handler));
         avatar = eat;
         sizeX = 45; 
         sizeY = 45;

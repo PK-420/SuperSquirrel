@@ -33,14 +33,19 @@ import main.framework.gameObjects.LivingEntity;
 import main.graphics.Animation;
 
 /**
- *
- * @author Patrick Kerr
+ * This class represents a type of mob 
+* @author Patrick Kerr
  */
 public final class Skeleton extends LivingEntity {
 
     private final Animation walkLeft = new Animation (10, tex.skeleton[1], tex.skeleton[2], tex.skeleton[3]);
     private final Animation walkRight = new Animation (10, tex.skeleton[4], tex.skeleton[5], tex.skeleton[6]);
     
+    /**
+     * Creates a skeleton mob
+     * @param x Horizontal position to spawn the mob
+     * @param y Vertical position to spawn the mob
+     */
     public Skeleton(float x, float y) {
         super(x * Game.scale, y * Game.scale, ObjectId.Mob);
         hp = 25;
@@ -100,19 +105,27 @@ public final class Skeleton extends LivingEntity {
     public Rectangle getBounds() {
         return new Rectangle((int)x, (int)(y + sizeY/3), (int)sizeX, (int)(2*(sizeY/3)));
     }
-
+    /**
+     * @return The top collision box of the mob
+     */
     public Rectangle getBoundsTop() {
         return new Rectangle((int)(x + sizeX/4), (int)(y + sizeY/3), (int)sizeX/2, (int)sizeY/3);
     }
-    
+    /**
+     * @return The bottom collision box of the mob
+     */
     public Rectangle getBoundsBottom() {
         return new Rectangle((int)(x + sizeX/4), (int)(y + (sizeY/3) * 2), (int)sizeX/2, (int)sizeY/3);
     }
-
+    /**
+     * @return The left collision box of the mob
+     */
     public Rectangle getBoundsLeft() {
         return new Rectangle((int)x, (int)(y + sizeY/3), (int)sizeX/5, (int)(2*(sizeY/3)));
     }
-
+    /**
+     * @return The right collision box of the mob
+     */
     public Rectangle getBoundsRight() {
         return new Rectangle((int)(x + 4 * (sizeX/5)), (int)(y + sizeY/3), (int)sizeX/5, (int)(2*(sizeY/3)));
     }

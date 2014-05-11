@@ -27,7 +27,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
 /**
- *
+ * This class is in charge of animating images from sprite sheets
  * @author Patrick Kerr
  */
 public final class Animation {
