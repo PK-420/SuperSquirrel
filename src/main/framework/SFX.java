@@ -25,6 +25,8 @@
 package main.framework;
 
 import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineEvent;
+import javax.sound.sampled.LineListener;
 
 /**
  * This class is used to play sound effects
@@ -42,6 +44,7 @@ public final class SFX {
     public static void play(String path) {
         clip = loader.loadSFX(path);
         clip.start();
+        close();
     }
     
     /**
@@ -53,6 +56,18 @@ public final class SFX {
         if (x > 0) {
             clip = loader.loadSFX(path);
             clip.loop(x - 1);
+            close();
         }
+    }
+    
+    private static void close() {
+        clip.addLineListener(new LineListener() {
+            @Override
+            public void update(LineEvent evt) {
+              if (evt.getType() == LineEvent.Type.STOP) {
+                evt.getLine().close();
+              }
+            }
+        });
     }
 }
