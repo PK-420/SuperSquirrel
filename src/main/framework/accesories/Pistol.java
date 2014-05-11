@@ -53,7 +53,7 @@ public final class Pistol extends Weapon {
 
     @Override
     public void shoot() {
-        if (super.shoot(new Bullet(shooter.getX(), shooter.getY() + 15, shooter))) {
+        if (super.shoot(new Bullet(shooter))) {
             SFX.play("/audio/shot_pistol.wav");
             SFX.play("/audio/shell.wav");
         }

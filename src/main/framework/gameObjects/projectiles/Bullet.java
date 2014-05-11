@@ -38,8 +38,8 @@ public final class Bullet extends Projectile {
     
     private final Gunner host;
 
-    public Bullet(float x, float y, Gunner host) {
-        super(x, y, host);
+    public Bullet(Gunner host) {
+        super(host);
         this.sizeX = this.sizeY = 16;
         this.host = host;
         velX = 10 * host.getFacing();

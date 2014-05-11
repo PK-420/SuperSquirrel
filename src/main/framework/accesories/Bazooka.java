@@ -53,7 +53,7 @@ public final class Bazooka extends Weapon {
 
     @Override
     public void shoot() {
-        if (super.shoot(new Rocket(shooter.getX(), shooter.getY() + 15, shooter))) {
+        if (super.shoot(new Rocket(shooter))) {
             SFX.play("/audio/shot_rocket.wav");
         }
     }

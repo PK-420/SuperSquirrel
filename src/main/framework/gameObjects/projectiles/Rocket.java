@@ -38,8 +38,8 @@ public final class Rocket extends Projectile {
     
     private final Gunner host;
 
-    public Rocket(float x, float y, Gunner host) {
-        super(x, y, host);
+    public Rocket(Gunner host) {
+        super(host);
         this.sizeX = 20;
         this.sizeY = 16;
         this.host = host;

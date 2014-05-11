@@ -33,24 +33,19 @@ import java.util.LinkedList;
 import main.Game;
 
 /**
- *
+ * This class is the parent class of any projectile that can be fired
  * @author Patrick Kerr
  */
 public abstract class Projectile extends GameObject {
     
-    private final Gunner host;
-
-    public Projectile(float x, float y, Gunner host) {
-        super(x, y, ObjectId.Bullet);
+    /**
+     * Creates a new projectile
+     * @param host Gunner entity that will fire the projectile
+     */
+    public Projectile(Gunner host) {
+        super(host.getX(), host.getY() + 15, ObjectId.Bullet);
         this.sizeX = this.sizeY = 16;
-        this.host = host;
         velX = 10 * host.getFacing();
-//        if (handler.squirrel.getVelX() == 0) {
-//            this.velX = 5 * host.getFacing();
-//        }
-//        else {
-//            this.velX = (int)(host.getVelX() * 2.2);
-//        }
     }
 
     @Override
@@ -64,7 +59,7 @@ public abstract class Projectile extends GameObject {
 
     @Override
     public void render(Graphics g) {
-////////// Collision Box
+////////// Collision Box (Call super.render(); in child object)
         g.setColor(Color.RED);
         Graphics2D g2d = (Graphics2D) g;
         g2d.draw(getBounds());
