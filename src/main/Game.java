@@ -132,6 +132,8 @@ public final class Game extends Canvas implements Runnable {
         
         this.requestFocus();
         
+        SFX backgroundMusic = new SFX("/audio/background.wav");
+        
         System.out.println("Ready!");
     }
     

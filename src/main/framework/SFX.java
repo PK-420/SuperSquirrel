@@ -37,6 +37,11 @@ public final class SFX {
     private static Clip clip;
     private static final AudioClipLoader loader = new AudioClipLoader();
     
+    public SFX(String path) {
+        clip = loader.loadSFX(path);
+        clip.loop(-1);
+    }
+    
     /**
      * Plays the specified sound once
      * @param path
