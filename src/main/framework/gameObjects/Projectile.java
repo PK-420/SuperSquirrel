@@ -52,7 +52,7 @@ public abstract class Projectile extends GameObject {
     public void tick(LinkedList<GameObject> mapObj) {
         super.tick();
 //        velY += gravity; // Gravity acceleration
-        if (x > -Game.getCamera().getX() + Game.WIDTH || x < -Game.getCamera().getX()) { 
+        if (x > Game.getCamera().getX() + Game.WIDTH || x < Game.getCamera().getX()) { 
             mapObj.remove(this);
         }
     }

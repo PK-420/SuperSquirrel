@@ -164,13 +164,6 @@ public final class Game extends Canvas implements Runnable {
                 timer += 1000;
                 fps = frames;
                 ups = updates;
-
-                if (handler.player != null &&
-                        handler.player.getVelX() == 0 &&
-                        handler.player.getFacing() != 0 &&
-                        r.nextInt(5) == 0) {
-                    handler.player.setFacing(0); // Idle player
-                }
                 frames = 0;
                 updates = 0;
             }
@@ -198,11 +191,11 @@ public final class Game extends Canvas implements Runnable {
         g.setColor(new Color(25, 191, 224));  // background color
         g.fillRect(0, 0, getWidth(), getHeight()); // Fill
         for (int i = 0; i < (level.getWidth() * scale) / (tex.cloud.getWidth() / 2); i++) { // Clouds
-            g.drawImage(tex.cloud, (int)cam.getX()/2 + ((tex.cloud.getWidth()/3) * i), (i % 3) * (i % 4) * 10, tex.cloud.getWidth()/2, tex.cloud.getHeight()/2, null);
+            g.drawImage(tex.cloud, (int)-cam.getX()/2 + ((tex.cloud.getWidth()/3) * i), (i % 3) * (i % 4) * 10, tex.cloud.getWidth()/2, tex.cloud.getHeight()/2, null);
         }
-        g2d.translate(cam.getX(), cam.getY()); // Cam Begins 
+        g2d.translate(-cam.getX(), -cam.getY()); // Cam Begins 
         handler.render(g); // Object rendering
-        g2d.translate(-cam.getX(), -cam.getY()); // Cam Ends
+        g2d.translate(cam.getX(), cam.getY()); // Cam Ends
 
         hud.render(g); // Draw HUD
         /////////// Drawing ends;

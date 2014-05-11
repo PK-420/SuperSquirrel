@@ -51,7 +51,7 @@ public final class Camera {
     public void tick(GameObject player) {
 //         x = -player.getX() + Game.WIDTH / 2;
         if (player != null) {
-            x += ((-player.getX() + (Game.WIDTH / 2)) - x) * 0.05; // Tweening effect
+            x += ((player.getX() - (Game.WIDTH / 2)) - x) * 0.05; // Tweening effect
         }
     }
 
