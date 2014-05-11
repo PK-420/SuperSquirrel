@@ -27,6 +27,7 @@ package main.framework.accesories;
 import main.framework.*;
 import java.awt.Color;
 import java.awt.Graphics;
+import main.Game;
 import main.graphics.hudObjects.Symbols;
 
 /**
@@ -65,7 +66,7 @@ public abstract class Weapon {
      * If greater than 0, is the minimum time between automatic shots (in ticks)
      * If equals 0, is considered like a single fire weapon (Must pull the trigger again to fire)
      */
-    protected int cooldown = 0; // (Default) 
+    private int cooldown = 0; // (Default) 
     private int cdTimer = 0; // Current cooldown timer status
     private boolean canShoot = true;
     
@@ -94,13 +95,14 @@ public abstract class Weapon {
         if (cdTimer < 0) {
             cdTimer = cooldown;
             if (canShoot) {
-                canShoot = this.isAuto();
                 if (reloadTimer < 0 && bullets-- > 0) {
                     handler.addObjectLast(projectile);
+                    canShoot = this.isAuto();
                     return true;
                 } else {
                     bullets = 0;
                     SFX.play("/audio/empty_gun.wav");
+                    canShoot = false;
                 }
             }
         }
@@ -204,5 +206,18 @@ public abstract class Weapon {
      */
     public boolean isAuto() {
         return cooldown != 0;
+    }
+    
+    /**
+     * Sets the firing rate of the weapon
+     * @param rpm Rounds per minute, must be greater than 0, else it will be considered a semi-automatic weapon
+     */
+    protected void setFireRate(int rpm) {
+        if (rpm > 0) {
+            cooldown = (int)(Game.tps / (rpm / 60f)); // Sets the automatic fire rate
+            if (cooldown == 0) cooldown = -1; // if we reached the maximum the game can handle...
+        } else {
+            cooldown = 0; // Semi-auto gun
+        }
     }
 }
