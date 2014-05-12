@@ -25,6 +25,7 @@
 package main.framework;
 
 import javax.sound.sampled.Clip;
+import javax.sound.sampled.FloatControl;
 
 /**
  * This class is used for looping music tracks
@@ -33,13 +34,26 @@ import javax.sound.sampled.Clip;
 public class Music {
     
     private final Clip clip;
+    private final FloatControl gainControl;
     private final AudioClipLoader loader = new AudioClipLoader();
     /**
      * Creates a looping Music track
-     * @param path
+     * @param path Audio file to loop
      */
     public Music(String path) {
         clip = loader.loadSFX(path);
+        gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+    }
+    
+    /**
+     * Creates a looping Music track
+     * @param path Audio file to loop
+     * @param gain Level of audio gain
+     */
+    public Music(String path, float gain) {
+        clip = loader.loadSFX(path);
+        gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+        gainControl.setValue(gain);
     }
     
     /**
@@ -54,5 +68,25 @@ public class Music {
      */
     public void pause() {
         clip.stop();
+    }
+    
+    /**
+     * @param gain Desired gain level for the clip
+     */
+    public void setGainLevel(float gain) {
+        if (gain > gainControl.getMaximum()) {
+            gainControl.setValue(gainControl.getMaximum());
+        } else if (gain < gainControl.getMinimum()) {
+            gainControl.setValue(gainControl.getMinimum());
+        } else {
+            gainControl.setValue(gain);
+        }
+    }
+    
+    /**
+     * @return Current gain level of the clip
+     */
+    public float getGainLevel() {
+        return gainControl.getValue();
     }
 }

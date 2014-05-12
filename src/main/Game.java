@@ -87,7 +87,7 @@ public final class Game extends Canvas implements Runnable {
     private final BufferedImageLoader loader = new BufferedImageLoader();
     private final Handler handler = new Handler();
     
-    private final Music backgroundMusic = new Music("/audio/background.wav");
+    private final Music backgroundMusic = new Music("/audio/background.wav", -5f);
     
     public static void main(String args[]) {
         gameFrame = new Window(800, 600, "SuperSquirrel Prototype -- ©2014 Patrick Kerr", new Game());
@@ -223,6 +223,8 @@ public final class Game extends Canvas implements Runnable {
     }
    
     private void pollKeyboard() {
+        if (input.isKeyDown(KeyEvent.VK_ADD)) backgroundMusic.setGainLevel(backgroundMusic.getGainLevel() + 0.7f);
+        if (input.isKeyDown(KeyEvent.VK_SUBTRACT)) backgroundMusic.setGainLevel(backgroundMusic.getGainLevel() - 0.7f);
         if (input.isKeyReleased()) {
             if (input.isKeyUp(KeyEvent.VK_P) || input.isKeyUp(KeyEvent.VK_PAUSE)) togglePause(); // P and PAUSE = Pause Game
             if (input.isKeyUp(KeyEvent.VK_F1)) { // Help Popup
