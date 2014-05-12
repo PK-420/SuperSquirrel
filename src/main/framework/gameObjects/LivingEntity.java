@@ -83,9 +83,6 @@ public abstract class LivingEntity extends GameObject {
             }
         }
         velX *= (1 - drag);
-        if ((velX < 0.01 && velX >= 0) || (velX > -0.01 && velX <= 0)) {
-            velX = 0;
-        }
         if (jumping || falling) {
                 velY += gravity;
                 if (velY > tVel) {

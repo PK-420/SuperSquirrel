@@ -72,7 +72,10 @@ public abstract class Player extends LivingEntity implements Gunner {
     
     @Override
     public void tick(LinkedList<GameObject> lstObj) {
-        super.tick();        
+        super.tick();  
+        if ((velX < 0.25 && velX >= 0) || (velX > -0.25 && velX <= 0)) {
+            velX = 0;
+        }
         gun.get(selectedGun).tick();
         for (GameObject tmpObj : lstObj) {
             /* if (tmpObj.getId() == ObjectId.Water) {
