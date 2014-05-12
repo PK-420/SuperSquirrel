@@ -119,6 +119,7 @@ public abstract class Player extends LivingEntity implements Gunner {
             } 
             else if (tmpObj.getId() == ObjectId.Coin) {
                 if (tmpObj.getBounds().intersects(getBounds())) {
+                    SFX.play("/audio/coin.wav");
                     lstObj.remove(tmpObj);
                     coins++;
                 }
