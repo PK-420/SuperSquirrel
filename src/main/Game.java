@@ -86,7 +86,9 @@ public final class Game extends Canvas implements Runnable {
     private final Random r = new Random();
     private final BufferedImageLoader loader = new BufferedImageLoader();
     private final Handler handler = new Handler();
-
+    
+    private final Music backgroundMusic = new Music("/audio/background.wav");
+    
     public static void main(String args[]) {
         gameFrame = new Window(800, 600, "SuperSquirrel Prototype -- ©2014 Patrick Kerr", new Game());
     }
@@ -132,7 +134,7 @@ public final class Game extends Canvas implements Runnable {
         
         this.requestFocus();
         
-        SFX backgroundMusic = new SFX("/audio/background.wav");
+        backgroundMusic.start();
         
         System.out.println("Ready!");
     }
@@ -209,10 +211,20 @@ public final class Game extends Canvas implements Runnable {
     public static boolean isPaused() {
         return paused;
     }
+    
+    private void togglePause() {
+        if (paused) {
+            paused = false;
+            backgroundMusic.start();
+        } else {
+            paused = true;
+            backgroundMusic.pause();
+        }
+    }
    
     private void pollKeyboard() {
         if (input.isKeyReleased()) {
-            if (input.isKeyUp(KeyEvent.VK_P) || input.isKeyUp(KeyEvent.VK_PAUSE)) paused = !paused; // P = Pause Game
+            if (input.isKeyUp(KeyEvent.VK_P) || input.isKeyUp(KeyEvent.VK_PAUSE)) togglePause(); // P and PAUSE = Pause Game
             if (input.isKeyUp(KeyEvent.VK_F1)) { // Help Popup
                 Thread t = new Thread() {
                     @Override

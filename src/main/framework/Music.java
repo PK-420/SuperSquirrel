@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- * Copyright 2014 Patrick Kerr.
+ * Copyright 2014 Patrick.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -25,49 +25,34 @@
 package main.framework;
 
 import javax.sound.sampled.Clip;
-import javax.sound.sampled.LineEvent;
-import javax.sound.sampled.LineListener;
 
 /**
- * This class is used to play sound effects
- * @author Patrick Kerr
+ * This class is used for looping music tracks
+ * @author Patrick
  */
-public final class SFX {
+public class Music {
     
-    private static Clip clip;
-    private static final AudioClipLoader loader = new AudioClipLoader();
-    
+    private final Clip clip;
+    private final AudioClipLoader loader = new AudioClipLoader();
     /**
-     * Plays the specified sound once
+     * Creates a looping Music track
      * @param path
      */
-    public static void play(String path) {
+    public Music(String path) {
         clip = loader.loadSFX(path);
-        clip.start();
-        close();
     }
     
     /**
-     * Plays the specified sound for x times
-     * @param path Path to the sound clip
-     * @param x Numbers of time to loop (x must be greater than 0)
+     * Starts the looping track
      */
-    public static void play(String path, int x) {
-        if (x > 0) {
-            clip = loader.loadSFX(path);
-            clip.loop(x - 1);
-            close();
-        }
+    public void start() {
+        clip.loop(-1);
     }
     
-    private static void close() {
-        clip.addLineListener(new LineListener() {
-            @Override
-            public void update(LineEvent evt) {
-              if (evt.getType() == LineEvent.Type.STOP) {
-                evt.getLine().close();
-              }
-            }
-        });
+    /**
+     * Pauses the looping track
+     */
+    public void pause() {
+        clip.stop();
     }
 }
