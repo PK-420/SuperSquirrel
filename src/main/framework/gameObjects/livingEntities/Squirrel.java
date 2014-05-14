@@ -87,49 +87,51 @@ public final class Squirrel extends Player {
     public void render(Graphics g) {
         super.render(g);
 //        g.fillRect((int)x, (int)y, (int)sizeX, (int)sizeY);
-        if (isAlive()) {
-            walkLeft.setSpeed(13 - (int) Math.abs(velX));
-            walkRight.setSpeed(13 - (int) Math.abs(velX));
-            if (velX != 0) { // Got Velocity
-                if (jumping) { // is Jumping
-                    if (facing > 0) {
-                        g.drawImage(tex.squirrel[2], (int) x, (int) y, (int) sizeX, (int) sizeY, null);
-                    } else if (facing < 0) {
-                        g.drawImage(tex.squirrel[6], (int) x, (int) y, (int) sizeX, (int) sizeY, null);
+        if (protection % 5 == 0) {
+            if (isAlive()) {
+                walkLeft.setSpeed(13 - (int) Math.abs(velX));
+                walkRight.setSpeed(13 - (int) Math.abs(velX));
+                if (velX != 0) { // Got Velocity
+                    if (jumping) { // is Jumping
+                        if (facing > 0) {
+                            g.drawImage(tex.squirrel[2], (int) x, (int) y, (int) sizeX, (int) sizeY, null);
+                        } else if (facing < 0) {
+                            g.drawImage(tex.squirrel[6], (int) x, (int) y, (int) sizeX, (int) sizeY, null);
+                        } else {
+                            g.drawImage(tex.squirrel[0], (int) x, (int) y, (int) sizeX, (int) sizeY, null);
+                        }
                     } else {
-                        g.drawImage(tex.squirrel[0], (int) x, (int) y, (int) sizeX, (int) sizeY, null);
+                        if (facing > 0) {
+                            walkRight.drawAnimation(g, (int) x, (int) y, (int) sizeX, (int) sizeY);
+                        } else if (facing < 0) {
+                            walkLeft.drawAnimation(g, (int) x, (int) y, (int) sizeX, (int) sizeY);
+                        } else {
+                            g.drawImage(tex.squirrel[0], (int) x, (int) y, (int) sizeX, (int) sizeY, null);
+                        }
                     }
-                } else {
-                    if (facing > 0) {
-                        walkRight.drawAnimation(g, (int) x, (int) y, (int) sizeX, (int) sizeY);
-                    } else if (facing < 0) {
-                        walkLeft.drawAnimation(g, (int) x, (int) y, (int) sizeX, (int) sizeY);
+                } else { // Stopped
+                    if (jumping) { // is Jumping
+                        if (facing > 0) {
+                            g.drawImage(tex.squirrel[18], (int) x, (int) y, (int) sizeX, (int) sizeY, null);
+                        } else if (facing < 0) {
+                            g.drawImage(tex.squirrel[28], (int) x, (int) y, (int) sizeX, (int) sizeY, null);
+                        } else {
+                            g.drawImage(tex.squirrel[0], (int) x, (int) y, (int) sizeX, (int) sizeY, null);
+                        }
                     } else {
-                        g.drawImage(tex.squirrel[0], (int) x, (int) y, (int) sizeX, (int) sizeY, null);
+                        if (facing > 0) {
+                            g.drawImage(tex.squirrel[1], (int) x, (int) y, (int) sizeX, (int) sizeY, null);
+                        } else if (facing < 0) {
+                            g.drawImage(tex.squirrel[5], (int) x, (int) y, (int) sizeX, (int) sizeY, null);
+                        } else {
+                            // eat.drawAnimation(g, (int) x, (int) y, (int) sizeX, (int) sizeY); 
+                            g.drawImage(tex.squirrel[0], (int) x, (int) y, (int) sizeX, (int) sizeY, null);
+                        }
                     }
                 }
-            } else { // Stopped
-                if (jumping) { // is Jumping
-                    if (facing > 0) {
-                        g.drawImage(tex.squirrel[18], (int) x, (int) y, (int) sizeX, (int) sizeY, null);
-                    } else if (facing < 0) {
-                        g.drawImage(tex.squirrel[28], (int) x, (int) y, (int) sizeX, (int) sizeY, null);
-                    } else {
-                        g.drawImage(tex.squirrel[0], (int) x, (int) y, (int) sizeX, (int) sizeY, null);
-                    }
-                } else {
-                    if (facing > 0) {
-                        g.drawImage(tex.squirrel[1], (int) x, (int) y, (int) sizeX, (int) sizeY, null);
-                    } else if (facing < 0) {
-                        g.drawImage(tex.squirrel[5], (int) x, (int) y, (int) sizeX, (int) sizeY, null);
-                    } else {
-                        // eat.drawAnimation(g, (int) x, (int) y, (int) sizeX, (int) sizeY); 
-                        g.drawImage(tex.squirrel[0], (int)x, (int)y, (int)sizeX, (int)sizeY, null);
-                    }
-                }
+            } else {
+                dead.drawAnimation(g, (int) x, (int) y, (int) sizeX, (int) sizeY);
             }
-        } else {
-            dead.drawAnimation(g, (int) x, (int) y, (int) sizeX, (int) sizeY);
         }
 //////////Collision Boxes
 //        Graphics2D g2d = (Graphics2D) g;
