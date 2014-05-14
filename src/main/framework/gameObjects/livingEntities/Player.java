@@ -59,7 +59,10 @@ public abstract class Player extends LivingEntity implements Gunner {
      */
     protected int coins = 0;
     
-    private int protection = 0;
+    /**
+     * Integer representing ticks while the player is invincible
+     */
+    protected int protection = 0;
     
     /**
      * Creates a player
@@ -125,18 +128,26 @@ public abstract class Player extends LivingEntity implements Gunner {
                 }
             }
             else if (tmpObj.getId() == ObjectId.Mob) {
-                if (tmpObj.getBounds().intersects(getBounds())) {
+                if (tmpObj.getBounds().intersects(getBoundsBottom())) {
                     if (this.isAlive() && protection <= 0) {
-                        protection = 15;
+                        ((LivingEntity)tmpObj).wound(((LivingEntity)tmpObj).getHP());
+                        setVelY(-5);
+                        lstObj.add(new BloodSplatter(tmpObj));
+                    }
+                } else if (tmpObj.getBounds().intersects(getBoundsTop()) ||
+                        tmpObj.getBounds().intersects(getBoundsLeft()) ||
+                        tmpObj.getBounds().intersects(getBoundsRight())) {
+                    if (this.isAlive() && protection <= 0) {
+                        protection = 20;
                         hp-=20;
                         tmpObj.setVelX(-tmpObj.getVelX());
                         setVelY(-7);
                         lstObj.add(new BloodSplatter(this));
                     }
-                }
+                } 
             }
         }
-        if (protection-- < 0) {
+        if (protection-- <= 0) {
             protection = 0;
         }
     }
