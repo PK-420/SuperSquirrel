@@ -165,26 +165,32 @@ public abstract class Player extends LivingEntity implements Gunner {
         if (this.isAlive()) {
             if (input.isKeyPressed()) {
             }
-            if (input.isKeyDown(KeyEvent.VK_A) || input.isKeyDown(KeyEvent.VK_LEFT)) {
-                this.setFacing(-1);
-                if (Math.abs(this.getVelX()) < 5) {
-                    this.setVelX(5);
-                }
-                this.setSliding(true);
-            }
-            if (input.isKeyDown(KeyEvent.VK_D) || input.isKeyDown(KeyEvent.VK_RIGHT)) {
-                this.setFacing(1);
-                if (Math.abs(this.getVelX()) < 5) {
-                    this.setVelX(5);
-                }
-                this.setSliding(true);
-            }
             if (input.isKeyDown(KeyEvent.VK_SHIFT)) {
-                if (this.getVelX() != 0) {
+                if (input.isKeyDown(KeyEvent.VK_A) || input.isKeyDown(KeyEvent.VK_LEFT)) {
+                    this.setFacing(-1);
                     this.setVelX(7);
+                    this.setSliding(true);
                 }
-//        } else if (input.isKeyDown(KeyEvent.VK_CONTROL)) {
-//            if (handler.player.getVelX() != 0) handler.player.setVelX(2);
+                if (input.isKeyDown(KeyEvent.VK_D) || input.isKeyDown(KeyEvent.VK_RIGHT)) {
+                    this.setFacing(1);
+                    this.setVelX(7);
+                    this.setSliding(true);
+                }
+            } else {
+                if (input.isKeyDown(KeyEvent.VK_A) || input.isKeyDown(KeyEvent.VK_LEFT)) {
+                    this.setFacing(-1);
+                    if (Math.abs(this.getVelX()) < 5) {
+                        this.setVelX(5);
+                    }
+                    this.setSliding(true);
+                }
+                if (input.isKeyDown(KeyEvent.VK_D) || input.isKeyDown(KeyEvent.VK_RIGHT)) {
+                    this.setFacing(1);
+                    if (Math.abs(this.getVelX()) < 5) {
+                        this.setVelX(5);
+                    }
+                    this.setSliding(true);
+                }
             }
             if ((input.isKeyDown(KeyEvent.VK_W) || input.isKeyDown(KeyEvent.VK_UP)) && // Jump Key
                     !this.isJumping()) { // Currently on ground
